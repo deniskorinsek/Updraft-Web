@@ -195,7 +195,7 @@
     var holdStart = 0, holdX = 0, holdY = 0, holdMoved = 0, kbSteer = 0, noteUntil = 0, toastTimer = 0, placed = false;
     var ptr = { x: 0, y: 0, vx: 0, vy: 0, t: 0, active: false, last: -99, overZone: false };
     var parts = [], sparks = [], streaks = [], trail = [], SPR = {};
-    var lastTD = -1, lastTN = -1, lastCam = -1, lastAltTxt = '', lastE = -1, frameN = 0;
+    var lastTD = -1, lastTN = -1, lastCam = -1, lastAltTxt = '', lastE = -1;
     var best = 0; try { best = +localStorage.getItem('updraft-best') || 0; } catch (e) {}
 
     /* ---------- sprites (pre-rendered once) */
@@ -233,7 +233,9 @@
       if (band.b - band.t < fh * 0.6) { var mid = (topB + botT) / 2; band.t = mid - fh * 0.3; band.b = mid + fh * 0.3; }
       home.x = Z.l + Z.w / 2; home.y = band.t + (band.b - band.t) * 0.55;
       dpr = Math.min(W < 700 ? 1 : 1.25, window.devicePixelRatio || 1);
-      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var cw = Math.round(W * dpr), ch = Math.round(H * dpr);
+      if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; }   /* resizing clears the canvas: only when needed */
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       clouds.forEach(function (c) { c.el.style.transform = ''; var r = c.el.getBoundingClientRect(); c.top = r.top - hr.top; c.h = r.height; c.el.style.transform = c.tr; });
       if (!parts.length || Math.abs((parts.w || 0) - W) > 120) seedParticles();
       if (!placed) {
@@ -512,7 +514,6 @@
     function frame(nowMs) {
       if (!running) return;
       raf = requestAnimationFrame(frame);
-      if (nowMs - SC.t < 160 && (++frameN & 1)) return;        /* while the page scrolls, run at half rate */
       var dt = last ? Math.min(0.05, (nowMs - last) / 1000) : 0.016; last = nowMs; time += dt;
       var nowS = nowMs / 1000;
 
@@ -753,7 +754,7 @@
       mqRaf = requestAnimationFrame(mqFrame);
       var dt = mqLast ? Math.min(0.05, (now - mqLast) / 1000) : 0.016; mqLast = now;
       var sy = window.scrollY, dy = sy - mqSy; mqSy = sy;
-      mqX += (mqHover ? 0 : 36 * dt) + dy * 0.6;
+      mqX += (mqHover ? 0 : 36 * dt) + clamp(dy, -40, 40) * 0.6;   /* capped: a fast flick must not strobe the screens */
       if (mqHalf > 0) mqX = ((mqX % mqHalf) + mqHalf) % mqHalf;
       mqTrack.style.transform = 'translate3d(' + (-mqX).toFixed(1) + 'px,0,0)';
     };
@@ -800,18 +801,30 @@
       if (worldEl) worldEl.textContent = t(WORLD_KEY[world]);
       if (kEl) { var k = t(K_KEY[world]); if (k) kEl.innerHTML = k; }
     }
-    function setBiome(i, force) {
-      if (i === idx && !force) return;
+    /* The phone screen crossfades at most once per FADE ms: a fast scroll skips the biomes in between instead of
+       strobing through them. The caption follows the image that is actually shown. */
+    var FADE = 600, fadeUntil = 0, swapTimer = 0, shown = -1;
+    function swapTo(i) {
       var b = items[i]; if (!b) return;
+      var now = performance.now();
+      if (now < fadeUntil) { if (!swapTimer) swapTimer = setTimeout(function () { swapTimer = 0; swapTo(idx); }, fadeUntil - now + 16); return; }
+      if (i === shown) { if (biomeEl) biomeEl.textContent = name(b); return; }
       var next = layers[1 - active], cur = layers[active], src = 'assets/biomes/' + b.id + '@2x.webp', id = ++swapId;
-      idx = i;
       var show = function () {                                   /* crossfade only once the image is decoded */
         if (id !== swapId) return;                               /* a newer biome has taken over */
         next.classList.add('is-on'); cur.classList.remove('is-on'); active = 1 - active;
+        shown = i; fadeUntil = performance.now() + FADE;
+        if (biomeEl) biomeEl.textContent = name(b);
       };
+      if (cur.getAttribute('src') === src) { shown = i; if (biomeEl) biomeEl.textContent = name(b); return; }
       if (next.getAttribute('src') !== src) { next.src = src; if (next.decode) next.decode().then(show, show); else show(); }
       else show();
-      if (biomeEl) biomeEl.textContent = name(b);
+    }
+    function setBiome(i, force) {
+      if (i === idx && !force) return;
+      var b = items[i]; if (!b) return;
+      idx = i;
+      swapTo(i);
       $$('li', list).forEach(function (li, j) { li.classList.toggle('is-on', j === i); });
       var s = b.sky, a = s[0], bb = s[1] || s[0], c = s[s.length - 2] || s[0], d = s[s.length - 1];
       section.style.setProperty('--sky-a', a); section.style.setProperty('--sky-b', bb); section.style.setProperty('--sky-c', c); section.style.setProperty('--sky-d', d);
@@ -841,7 +854,7 @@
       tab.addEventListener('click', function () {
         world = tab.getAttribute('data-world');
         tabs.forEach(function (x) { x.setAttribute('aria-selected', String(x === tab)); });
-        buildList(); idx = -1; measure(); update(window.scrollY, window.innerHeight);
+        buildList(); idx = -1; shown = -1; measure(); update(window.scrollY, window.innerHeight);
         if (window.scrollY > trackTop) window.scrollTo({ top: trackTop + 2, behavior: reduced ? 'auto' : 'smooth' });
       });
     });
@@ -858,6 +871,7 @@
     var ctx = canvas.getContext('2d'), W = 0, H = 0, flakes = [], running = false, raf = 0, last = 0;
     function resize() {
       var r = canvas.getBoundingClientRect(), dpr = Math.min(1.5, window.devicePixelRatio || 1);
+      if (W === r.width && H === r.height && flakes.length) return;   /* phones fire resize when the address bar moves: keep the snow */
       W = r.width; H = r.height; canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       flakes = []; for (var i = 0; i < 90; i++) flakes.push(make(true));
     }
