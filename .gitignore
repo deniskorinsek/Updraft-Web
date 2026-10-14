@@ -1,0 +1,15 @@
+# Secrets — never commit keys, keystores or credentials
+.env
+.env.*
+keystore.properties
+*.jks
+*.keystore
+*service-account*.json
+local.properties
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

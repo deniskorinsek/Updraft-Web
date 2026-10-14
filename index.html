@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UPDRAFT — A small breath. A big adventure.</title>
+<meta name="description" content="UPDRAFT is a breath-controlled flying game for Android. Blow into your phone to lift a feather, a bubble or a snowflake, tilt to steer and ride the wind as high as you can.">
+<meta name="theme-color" content="#4A5674">
+<link rel="canonical" href="https://deniskorinsek.github.io/Updraft-Web/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="UPDRAFT — A small breath. A big adventure.">
+<meta property="og:description" content="Blow into your phone to lift a feather, a bubble or a snowflake. Tilt to steer. Ride the wind as high as you can. Free on Google Play.">
+<meta property="og:image" content="https://deniskorinsek.github.io/Updraft-Web/assets/brand/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://deniskorinsek.github.io/Updraft-Web/">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="sl_SI">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32">
+<link rel="icon" href="assets/brand/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/cormorant-garamond-latin-500-italic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="css/site.css">
+<script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"UPDRAFT","applicationCategory":"Game","operatingSystem":"Android","gamePlatform":"Android","description":"A breath-controlled flying game. Blow into your phone to lift a feather, a bubble or a snowflake, tilt to steer and ride the wind as high as you can.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"genre":["Arcade","Casual","Skill"]}
+</script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-mic" viewBox="0 0 24 24"><path d="M12,3.5 H12 A3,3 0 0 1 15,6.5 V11.5 A3,3 0 0 1 12,14.5 H12 A3,3 0 0 1 9,11.5 V6.5 A3,3 0 0 1 12,3.5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5M9 20.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-tilt" viewBox="0 0 24 24"><path d="M10,3.5 H14 A2,2 0 0 1 16,5.5 V16.5 A2,2 0 0 1 14,18.5 H10 A2,2 0 0 1 8,16.5 V5.5 A2,2 0 0 1 10,3.5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 15a8.5 8.5 0 0 0 4.5 5.5M20.5 15a8.5 8.5 0 0 1-4.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 15.5h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-wind" viewBox="0 0 24 24"><path d="M8.69,11.93 L8.59,11.82 L8.47,11.73 L8.32,11.67 L8.14,11.63 L7.95,11.64 L7.75,11.69 L7.55,11.78 L7.36,11.92 L7.2,12.11 L7.07,12.33 L6.97,12.59 L6.93,12.88 L6.95,13.18 L7.02,13.49 L7.16,13.79 L7.35,14.08 L7.61,14.33 L7.92,14.54 L8.28,14.69 L8.68,14.78 L9.1,14.8 L9.53,14.73 L9.95,14.58 L10.36,14.36 L10.72,14.05 L11.04,13.67 L11.28,13.23 L11.45,12.73 L11.53,12.2 L11.51,11.65 L11.39,11.1 L11.17,10.56 L10.85,10.06 L10.43,9.62 L9.92,9.24 L9.35,8.96 L8.72,8.78 L8.05,8.72 L7.37,8.78 L6.7,8.96 L6.05,9.26 L5.46,9.69 L4.94,10.22 L4.52,10.85 L4.21,11.56 L4.02,12.32 L3.98,13.13 L4.08,13.94 L4.32,14.73 L4.72,15.48 L5.24,16.17 L5.89,16.75 L6.65,17.22 L7.49,17.56 L8.4,17.74 L9.33,17.76 L10.27,17.61 L11.18,17.29 L12.04,16.81 L12.81,16.18 L13.46,15.41 L13.97,14.52 L14.32,13.54 L14.5,12.5 C17.3,12.5 19.3,9.5 22.5,10.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-wind_dust" viewBox="0 0 24 24"><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z" fill="currentColor"/></symbol><symbol id="i-leaderboard" viewBox="0 0 24 24"><path d="M4 20V13h5v7M9 20V8.5h6V20M15 20v-9h5v9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 20h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M6.5,5.5 H17.5 A2.5,2.5 0 0 1 20,8.0 V17.5 A2.5,2.5 0 0 1 17.5,20.0 H6.5 A2.5,2.5 0 0 1 4,17.5 V8.0 A2.5,2.5 0 0 1 6.5,5.5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-challenges" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 6H5.5a2.5 2.5 0 0 0 2.8 4M16 6h2.5a2.5 2.5 0 0 1-2.8 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 13v4M8.5 20h7M10 17h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-collection" viewBox="0 0 24 24"><path d="M5.5,4 H9.5 A1.5,1.5 0 0 1 11,5.5 V9.5 A1.5,1.5 0 0 1 9.5,11 H5.5 A1.5,1.5 0 0 1 4,9.5 V5.5 A1.5,1.5 0 0 1 5.5,4 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5,4 H18.5 A1.5,1.5 0 0 1 20,5.5 V9.5 A1.5,1.5 0 0 1 18.5,11 H14.5 A1.5,1.5 0 0 1 13,9.5 V5.5 A1.5,1.5 0 0 1 14.5,4 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5,13 H9.5 A1.5,1.5 0 0 1 11,14.5 V18.5 A1.5,1.5 0 0 1 9.5,20 H5.5 A1.5,1.5 0 0 1 4,18.5 V14.5 A1.5,1.5 0 0 1 5.5,13 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5,13 H18.5 A1.5,1.5 0 0 1 20,14.5 V18.5 A1.5,1.5 0 0 1 18.5,20 H14.5 A1.5,1.5 0 0 1 13,18.5 V14.5 A1.5,1.5 0 0 1 14.5,13 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-trail" viewBox="0 0 24 24"><path d="M3.5 16.5c3.5 0 4.5-3 8-3s4.5 3 9 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 11c3 0 4-2.2 7-2.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.4,8.5 a1.6,1.6 0 1,0 3.2,0 a1.6,1.6 0 1,0 -3.2,0" fill="currentColor"/><path d="M18.9,12.5 a1.1,1.1 0 1,0 2.2,0 a1.1,1.1 0 1,0 -2.2,0" fill="currentColor"/></symbol><symbol id="i-badge" viewBox="0 0 24 24"><path d="M6.5,9.5 a5.5,5.5 0 1,0 11.0,0 a5.5,5.5 0 1,0 -11.0,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 14.2L7.6 20.5l4.4-2.3 4.4 2.3-1.4-6.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-privacy" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5,11.5 H13.5 A1,1 0 0 1 14.5,12.5 V15.0 A1,1 0 0 1 13.5,16.0 H10.5 A1,1 0 0 1 9.5,15.0 V12.5 A1,1 0 0 1 10.5,11.5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.5 11.5v-1a1.5 1.5 0 0 1 3 0v1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-touch" viewBox="0 0 24 24"><path d="M10 11V5.5a1.5 1.5 0 0 1 3 0v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 10.5a1.5 1.5 0 0 1 3 0v1.5M16 11.2a1.5 1.5 0 0 1 3 .3V15a6 6 0 0 1-6 6h-1.2a6 6 0 0 1-4.6-2.2L4.8 15.6a1.5 1.5 0 0 1 2.3-1.9L10 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19.5h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-8.5 8.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-language" viewBox="0 0 24 24"><path d="M3.5,12 a8.5,8.5 0 1,0 17.0,0 a8.5,8.5 0 1,0 -17.0,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 12h17M12 3.5c2.5 2.4 3.6 5.2 3.6 8.5s-1.1 6.1-3.6 8.5c-2.5-2.4-3.6-5.2-3.6-8.5S9.5 5.9 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-chevron_right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-chevron_down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol><symbol id="i-help" viewBox="0 0 24 24"><path d="M3.5,12 a8.5,8.5 0 1,0 17.0,0 a8.5,8.5 0 1,0 -17.0,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.6 9.6a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.8v.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.6v.4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-feedback" viewBox="0 0 24 24"><path d="M5 4.5h14A1.5 1.5 0 0 1 20.5 6v8.5A1.5 1.5 0 0 1 19 16h-7.5L7 19.5V16H5a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 5 4.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-mic_off" viewBox="0 0 24 24"><path d="M9 9V6.5a3 3 0 0 1 6 0v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 11.5a6.5 6.5 0 0 0 10.8 4.9M18.5 11.5c0 .7-.1 1.4-.3 2M12 18v2.5M9 20.5h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4l16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-snowflake" viewBox="0 0 24 24"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 4.5L12 6.5l2.5-2M9.5 19.5l2.5-2 2.5 2M4 10.6l3 .6-.9 3M20 13.4l-3-.6.9-3M4 13.4l3-.6-.9-3M20 10.6l-3 .6.9 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><path d="M6.0,9.5 H18.0 A1.5,1.5 0 0 1 19.5,11.0 V18.5 A1.5,1.5 0 0 1 18.0,20.0 H6.0 A1.5,1.5 0 0 1 4.5,18.5 V11.0 A1.5,1.5 0 0 1 6.0,9.5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 9.5h17M12 9.5V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 9.5c-1.6-3.4-5.6-3.6-5.6-1.4 0 1.4 3 1.4 5.6 1.4zm0 0c1.6-3.4 5.6-3.6 5.6-1.4 0 1.4-3 1.4-5.6 1.4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-sleigh" viewBox="0 0 24 24"><path d="M3.5 16.5h13.5c2 0 3.5-1.3 3.5-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 16.5c-1.8-1.6-2.4-4-1.8-6.4h6.8l2.2 3.4h4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 16.5v2.5M14 16.5v2.5M5 19h12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 3.5l.8 1.7 1.9.3-1.4 1.3.3 1.9-1.6-.9-1.7.9.4-1.9-1.4-1.3 1.9-.3z" fill="currentColor"/></symbol><symbol id="i-perfect" viewBox="0 0 24 24"><path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-near_miss" viewBox="0 0 24 24"><path d="M13 21l4-9.5 4 9.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 15.5C6 12 10 9.4 15.2 8.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.5 10.6c2.2-1.7 4.6-2.9 7.4-3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.3,7.8 a1.7,1.7 0 1,0 3.4,0 a1.7,1.7 0 1,0 -3.4,0" fill="currentColor"/></symbol><symbol id="i-missions" viewBox="0 0 24 24"><path d="M7.0,3.5 H17.0 A2.5,2.5 0 0 1 19.5,6.0 V18.0 A2.5,2.5 0 0 1 17.0,20.5 H7.0 A2.5,2.5 0 0 1 4.5,18.0 V6.0 A2.5,2.5 0 0 1 7.0,3.5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 9l2 2 4-4M8.5 15.5h7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-chest" viewBox="0 0 24 24"><path d="M6,10 H18 A2,2 0 0 1 20,12 V18 A2,2 0 0 1 18,20 H6 A2,2 0 0 1 4,18 V12 A2,2 0 0 1 6,10 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 6.8h17V10h-17z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6.8V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 6.8c-1.5-3-5-3.2-5-1.2 0 1.3 2.6 1.2 5 1.2zm0 0c1.5-3 5-3.2 5-1.2 0 1.3-2.6 1.2-5 1.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-altitude" viewBox="0 0 24 24"><path d="M12 20V5M6.5 10.5L12 5l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 20h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-feather" viewBox="0 0 24 24"><path d="M5 19C8.5 11 13 6.5 20 4c-1.2 6.5-5.5 11.5-12.6 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19l9-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-bubble" viewBox="0 0 24 24"><path d="M4,12 a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.8 10a4.6 4.6 0 0 1 3-3.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.6l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-level" viewBox="0 0 24 24"><path d="M12 3.5l7.5 4.3v8.4L12 20.5l-7.5-4.3V7.8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 12.5l2 2 3.5-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-gust_window" viewBox="0 0 24 24"><path d="M4.5,12 a7.5,7.5 0 1,0 15.0,0 a7.5,7.5 0 1,0 -15.0,0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8.6c.3 2 1.3 3 3.4 3.4-2 .3-3 1.3-3.4 3.4-.3-2-1.3-3-3.4-3.4 2-.3 3-1.3 3.4-3.4z" fill="currentColor"/></symbol><symbol id="i-slipstream" viewBox="0 0 24 24"><path d="M3 16c4-1 7-4 9-8s5-4.5 9-4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 20c4.5-.8 8-3.2 10.6-6.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12c2.6-.6 4.6-2 6-3.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 2.4l3.5 1.1-2.4 2.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-shop" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.5a1.5 1.5 0 0 1-1.5 1.5H7.7a1.5 1.5 0 0 1-1.5-1.5L5 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-ad" viewBox="0 0 24 24"><path d="M6,5 H18 A3,3 0 0 1 21,8 V16 A3,3 0 0 1 18,19 H6 A3,3 0 0 1 3,16 V8 A3,3 0 0 1 6,5 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M9.2,3 H14.8 A2.2,2.2 0 0 1 17,5.2 V18.8 A2.2,2.2 0 0 1 14.8,21 H9.2 A2.2,2.2 0 0 1 7,18.8 V5.2 A2.2,2.2 0 0 1 9.2,3 Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 18h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-calibrate" viewBox="0 0 24 24"><path d="M4.5,12 a7.5,7.5 0 1,0 15.0,0 a7.5,7.5 0 1,0 -15.0,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9,12 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-trash" viewBox="0 0 24 24"><path d="M4.5 7h15M9.5 7V5h5v2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 7l1 12.5h9l1-12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.2 10.5v6M13.8 10.5v6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-cloud_off" viewBox="0 0 24 24"><path d="M7 18.5a4.5 4.5 0 0 1-.5-9 6 6 0 0 1 11.6 1.6 3.7 3.7 0 0 1-.6 7.4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4l16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-sound_on" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-music_on" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.0,18 a2.5,2.5 0 1,0 5.0,0 a2.5,2.5 0 1,0 -5.0,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.0,16 a2.5,2.5 0 1,0 5.0,0 a2.5,2.5 0 1,0 -5.0,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 12V6.5a1.4 1.4 0 0 1 2.8 0V11M10.8 10.5V5.2a1.4 1.4 0 0 1 2.8 0v5.3M13.6 10.5V6.4a1.4 1.4 0 0 1 2.8 0V14a6 6 0 0 1-6 6h-.4a5 5 0 0 1-4.1-2.2L3.6 14a1.5 1.5 0 0 1 2.3-1.9L8 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><path d="M3.5,12 a8.5,8.5 0 1,0 17.0,0 a8.5,8.5 0 1,0 -17.0,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 11v5.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 7.6v.4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M4 17.5L3 8l5 4 4-6.5 4 6.5 5-4-1 9.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 20.5h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-friends" viewBox="0 0 24 24"><path d="M5.8,8.5 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.2 5.6a3.1 3.1 0 0 1 0 5.8M17.5 14.8c1.6.7 2.6 2.3 3 4.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-share" viewBox="0 0 24 24"><path d="M12 4v11M7.5 8.5L12 4l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 13v5.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-warning" viewBox="0 0 24 24"><path d="M12 4.2L21 19.5H3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 10v4.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 16.8v.4" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19 12a7 7 0 1 1-2.05-4.95" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 4.5v3.6h-3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-wifi_off" viewBox="0 0 24 24"><path d="M3.5 9a13 13 0 0 1 4.6-2.7M12 6a13 13 0 0 1 8.5 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 12.5a8 8 0 0 1 3-1.8M15.5 11a8 8 0 0 1 2 1.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 15.8a4 4 0 0 1 5 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4l16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9,12 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14,7 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8,17 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10.5 13.5a3.5 3.5 0 0 0 5 0l3-3a3.5 3.5 0 0 0-5-5l-1 1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 10.5a3.5 3.5 0 0 0-5 0l-3 3a3.5 3.5 0 0 0 5 5l1-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol></svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="nav-brand" href="#top" aria-label="UPDRAFT"><img src="assets/brand/wordmark.svg" alt="UPDRAFT" width="1200" height="300"></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#flyers" data-i18n="nav.flyers">Flyers</a>
+      <a href="#worlds" data-i18n="nav.worlds">Worlds</a>
+      <a href="#winter" data-i18n="nav.winter">Winter Winds</a>
+      <a href="#daily" data-i18n="nav.daily">Every day</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang-set="en" aria-pressed="true" lang="en">EN</button>
+        <button type="button" data-lang-set="sl" aria-pressed="false" lang="sl">SL</button>
+      </div>
+      <a class="btn btn-primary btn-sm btn-nav" href="https://play.google.com/store/apps/details?id=si.updraft" data-play rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="nav.cta">Google Play</span></a>
+      <button class="nav-menu" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><svg class="icon" aria-hidden="true"><use href="#i-chevron_down"/></svg></button>
+    </div>
+  </div>
+  <div class="nav-progress" aria-hidden="true"><span class="np-bar" id="np-bar"></span><img class="np-feather" id="np-feather" src="assets/flyers/feather_white.svg" alt="" width="217" height="113"></div>
+</header>
+<div class="nav-sheet" id="menu">
+  <a href="#how" data-i18n="nav.how">How it works</a>
+  <a href="#flyers" data-i18n="nav.flyers">Flyers</a>
+  <a href="#worlds" data-i18n="nav.worlds">Worlds</a>
+  <a href="#winter" data-i18n="nav.winter">Winter Winds</a>
+  <a href="#daily" data-i18n="nav.daily">Every day</a>
+  <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=si.updraft" data-play rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="hero.cta">Get it on Google Play</span></a>
+</div>
+
+<main id="top">
+
+<!-- ======================================================= HERO -->
+<section class="hero" id="hero">
+  <div class="sky" id="hero-sky" aria-hidden="true">
+    <div class="sky-layer sky-gold"></div>
+    <div class="sky-layer sky-dusk" id="sky-dusk"></div>
+    <div class="sky-layer sky-night" id="sky-night"></div>
+    <div class="sky-layer sky-stars" id="sky-stars"></div>
+    <div class="leak leak-1"></div>
+    <div class="leak leak-2"></div>
+    <div class="leak leak-3"></div>
+    <div class="leak leak-4"></div>
+    <div class="sun" id="sun"><div class="sun-rays"></div><div class="sun-core"></div></div>
+  </div>
+  <div class="hero-clouds" id="hero-clouds" aria-hidden="true">
+    <div class="cl cl-a" data-climb=".22" style="--t:3%;--l:-5%;--w:14%;--dd:150s;--o:.8"><img src="assets/world/cloud_soft_01.svg" alt=""></div>
+    <div class="cl cl-b" data-climb=".32" style="--t:27%;--l:46%;--w:9%;--dd:120s;--o:.6"><img src="assets/world/cloud_soft_03.svg" alt=""></div>
+    <div class="cl cl-c" data-climb=".4" style="--t:9%;--l:82%;--w:13%;--dd:170s;--o:.75"><img src="assets/world/cloud_soft_02.svg" alt=""></div>
+    <div class="cl cl-bank" data-climb=".75" data-nowrap style="--b:-10%;--l:-10%;--w:52%;--dd:110s"><img src="assets/world/clouds_bank_golden_01.svg" alt=""></div>
+    <div class="cl cl-bank" data-climb=".75" data-nowrap style="--b:-14%;--l:34%;--w:48%;--dd:140s"><img src="assets/world/clouds_bank_golden_02.svg" alt=""></div>
+    <div class="cl cl-bank" data-climb=".75" data-nowrap style="--b:-8%;--l:66%;--w:50%;--dd:95s"><img src="assets/world/clouds_bank_golden_03.svg" alt=""></div>
+  </div>
+  <canvas class="hero-fx" id="hero-fx" aria-hidden="true"></canvas>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy" id="hero-copy">
+      <span class="eyebrow hc-eyebrow in-1" data-i18n="hero.eyebrow">A breath-controlled flying game for Android</span>
+      <span class="hero-word in-2"><img src="assets/brand/wordmark.svg" alt="UPDRAFT" width="1200" height="300"></span>
+      <h1 class="hc-title in-3" data-i18n="hero.title">A small breath. A big adventure.</h1>
+      <p class="lead hc-lead in-4" data-i18n="hero.lead">Blow into your phone to lift a feather, a bubble or a snowflake. Tilt to steer. Ride the wind as high as you can.</p>
+      <div class="hero-cta hc-cta in-5">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=si.updraft" data-play data-play-badge rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="hero.cta">Get it on Google Play</span></a>
+        <a class="btn btn-ghost" href="#how"><span data-i18n="hero.cta2">How it works</span><svg class="icon" aria-hidden="true"><use href="#i-chevron_down"/></svg></a>
+      </div>
+      <ul class="hero-trust hc-trust in-5">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust1">Free to play</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust2">No banner ads</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-privacy"/></svg><span data-i18n="hero.trust3">Your breath never leaves your phone</span></li>
+      </ul>
+    </div>
+
+    <div class="zone" id="zone" tabindex="0" role="group" data-i18n-attr="aria-label:hero.zone" aria-label="Breath demo: move to steer, hold or press Space to blow">
+      <div class="zone-top">
+        <div class="hud-alt num"><span id="hero-alt">0</span><small>m</small></div>
+        <div class="hud-rule"><span id="hero-energy"></span></div>
+        <div class="hud-label" id="hero-label" data-i18n="hero.hintMouse">Move to steer · Hold to blow</div>
+        <div class="hud-best" id="hero-best" hidden></div>
+        <div class="hud-banner" id="hero-banner" aria-hidden="true"></div>
+      </div>
+      <div class="zone-bottom">
+        <div class="skins" role="radiogroup" data-i18n-attr="aria-label:hero.skins" aria-label="Try a skin">
+          <span class="skins-label" data-i18n="hero.skins">Try a skin</span>
+          <button class="skin" type="button" role="radio" aria-checked="true" data-skin="white" data-i18n-attr="aria-label:skin.white" aria-label="White feather"><img src="assets/skins/feather_white.svg" alt="" width="384" height="186"></button>
+          <button class="skin" type="button" role="radio" aria-checked="false" data-skin="peacock" data-i18n-attr="aria-label:skin.peacock" aria-label="Peacock feather"><img src="assets/skins/feather_peacock.svg" alt="" width="384" height="186"></button>
+          <button class="skin" type="button" role="radio" aria-checked="false" data-skin="fire" data-i18n-attr="aria-label:skin.fire" aria-label="Fire feather"><img src="assets/skins/feather_fire.svg" alt="" width="384" height="186"></button>
+          <button class="skin" type="button" role="radio" aria-checked="false" data-skin="ice" data-i18n-attr="aria-label:skin.ice" aria-label="Ice feather"><img src="assets/skins/feather_ice.svg" alt="" width="384" height="186"></button>
+          <button class="skin" type="button" role="radio" aria-checked="false" data-skin="golden" data-i18n-attr="aria-label:skin.golden" aria-label="Golden feather"><img src="assets/skins/feather_golden.svg" alt="" width="384" height="186"></button>
+          <button class="skin" type="button" role="radio" aria-checked="false" data-skin="galaxy" data-i18n-attr="aria-label:skin.galaxy" aria-label="Galaxy feather"><img src="assets/skins/feather_galaxy.svg" alt="" width="384" height="186"></button>
+        </div>
+        <button class="hud-mic" id="hero-mic" type="button" aria-pressed="false" data-i18n-attr="aria-label:hero.mic" aria-label="Use your microphone"><svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-toast" id="hero-toast" role="status" aria-live="polite">
+    <p><strong id="hero-toast-title"></strong><span data-i18n="hero.flightBody">In the game, your breath does the lifting.</span></p>
+    <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=si.updraft" data-play rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="hero.cta">Get it on Google Play</span></a>
+    <button class="toast-x" id="hero-toast-x" type="button" data-i18n-attr="aria-label:hero.close" aria-label="Close"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="hf-ring" id="hf-ring" aria-hidden="true"><img src="assets/world/gust_window_feather.svg" alt="" width="498" height="388"></div>
+  <div class="hf-pulse" id="hf-pulse" aria-hidden="true"></div>
+  <div class="hf" id="hf" aria-hidden="true">
+    <img src="assets/flyers/feather_white_bend_m100.svg" alt="" data-bend="-2">
+    <img src="assets/flyers/feather_white_bend_m050.svg" alt="" data-bend="-1">
+    <img src="assets/flyers/feather_white.svg" alt="" data-bend="0" class="is-on">
+    <img src="assets/flyers/feather_white_bend_p050.svg" alt="" data-bend="1">
+    <img src="assets/flyers/feather_white_bend_p100.svg" alt="" data-bend="2">
+  </div>
+  <div class="hf-pop" id="hf-pop" aria-hidden="true"></div>
+</section>
+
+<!-- ======================================================= HOW IT WORKS -->
+<section class="section s-how light" id="how">
+  <div class="floaters" aria-hidden="true">
+    <div class="flt l" data-px="0.32" style="--t:9%;--w:96px;--r:-28deg;--dur:9s"><img src="assets/flyers/feather_peacock.svg" alt=""></div>
+    <div class="flt r far" data-px="0.55" style="--t:6%;--w:70px;--r:18deg;--dur:11s;--del:-3s"><img src="assets/flyers/feather_ice.svg" alt=""></div>
+    <div class="flt r" data-px="-0.18" style="--t:58%;--w:118px;--r:-12deg;--dur:8s;--del:-5s"><img src="assets/flyers/feather_fire.svg" alt=""></div>
+    <div class="flt l far" data-px="0.48" style="--t:70%;--w:64px;--r:30deg;--dur:12s;--del:-7s"><img src="assets/flyers/feather_galaxy.svg" alt=""></div>
+    <div class="flt" data-px="0.2" style="--l:46%;--t:3%;--w:58px;--r:-40deg;--dur:10s;--del:-2s"><img src="assets/flyers/feather_golden.svg" alt=""></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="how.eyebrow">How it works</span>
+      <h2 class="h2 split" data-i18n="how.title">Easy to learn. Hard to master.</h2>
+      <p class="lead" data-i18n="how.lead">Three things to learn and a whole sky to climb. The difficulty comes from wind, timing and space — never from random unfairness.</p>
+    </div>
+    <div class="wind-trail" id="wind-trail" aria-hidden="true">
+      <svg><defs><linearGradient id="wt-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FF9FC6"/><stop offset=".35" stop-color="#F2C56B"/><stop offset=".7" stop-color="#8EF0E4"/><stop offset="1" stop-color="#B5A3FF"/></linearGradient></defs><path class="wt-base" d=""/><path class="wt-draw" d=""/></svg>
+      <span class="wt-ring"></span><span class="wt-ring"></span><span class="wt-ring"></span>
+      <img class="wt-feather" src="assets/flyers/feather_white.svg" alt="" width="217" height="113">
+    </div>
+    <ol class="steps">
+      <li class="step rv" style="--rd:.05s">
+        <div class="step-top"><span class="step-ic ic-mic"><svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg></span><span class="step-n num" aria-hidden="true">1</span></div>
+        <span class="step-kicker" data-i18n="how.s1.kicker">Your breath is the engine</span>
+        <h3 data-i18n="how.s1.title">Blow to fly</h3>
+        <p data-i18n="how.s1.body">A gentle puff gives a little lift. A long, steady blow becomes a Gust that carries you fast. Time it right for a Perfect.</p>
+      </li>
+      <li class="step rv" style="--rd:.15s">
+        <div class="step-top"><span class="step-ic ic-tilt"><svg class="icon" aria-hidden="true"><use href="#i-tilt"/></svg></span><span class="step-n num" aria-hidden="true">2</span></div>
+        <span class="step-kicker" data-i18n="how.s2.kicker">Your hands set the course</span>
+        <h3 data-i18n="how.s2.title">Tilt to steer</h3>
+        <p data-i18n="how.s2.body">Lean your phone left or right to drift through gaps, slip past branches and line up the next wind ring.</p>
+      </li>
+      <li class="step rv" style="--rd:.25s">
+        <div class="step-top"><span class="step-ic ic-wind"><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg></span><span class="step-n num" aria-hidden="true">3</span></div>
+        <span class="step-kicker" data-i18n="how.s3.kicker">The sky does the rest</span>
+        <h3 data-i18n="how.s3.title">Ride the wind</h3>
+        <p data-i18n="how.s3.body">Updrafts and thermals lift you for free; crosswinds push you off course. Read the air, chain near misses into combos and watch your Wind Energy grow.</p>
+      </li>
+    </ol>
+    <p class="how-note rv"><svg class="icon" aria-hidden="true"><use href="#i-touch"/></svg><span data-i18n="how.note">Prefer not to blow? Touch Mode lets you play the whole game with a tap.</span></p>
+  </div>
+</section>
+
+<!-- ======================================================= FLYERS -->
+<section class="section s-flyers light" id="flyers">
+  <div class="floaters" aria-hidden="true">
+    <div class="flt l bub" data-px="0.4" style="--t:14%;--w:74px;--dur:7s"><img src="assets/flyers/bubble_classic.svg" alt=""></div>
+    <div class="flt r bub far" data-px="0.6" style="--t:10%;--w:44px;--dur:9s;--del:-4s"><img src="assets/flyers/bubble_classic.svg" alt=""></div>
+    <div class="flt r bub" data-px="-0.15" style="--t:52%;--w:90px;--dur:8s;--del:-2s"><img src="assets/flyers/bubble_classic.svg" alt=""></div>
+    <div class="flt l bub far" data-px="0.5" style="--t:66%;--w:38px;--dur:10s;--del:-6s"><img src="assets/flyers/bubble_classic.svg" alt=""></div>
+  </div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="flyers.eyebrow">Three ways to fly</span>
+      <h2 class="h2 split" data-i18n="flyers.title">Same breath. Completely different physics.</h2>
+      <p class="lead" data-i18n="flyers.lead">Every flyer has its own weight, its own world and its own way of failing. Learn one, then fall for the next.</p>
+    </div>
+    <div class="flyers">
+      <article class="flyer is-feather rv" data-tilt>
+        <div class="flyer-sky" data-px="0.12" aria-hidden="true">
+          <img src="assets/world/cloud_soft_01.svg" alt="" style="--l:-10%;--t:14%;--w:48%;--o:.8">
+          <img src="assets/world/clouds_bank_golden_03.svg" alt="" style="--l:30%;--t:40%;--w:90%;--o:.95">
+        </div>
+        <div class="flyer-art has-frames" data-px="-0.07" data-flyer="feather" style="--aw:72%">
+          <img class="fr fr-base is-on" src="assets/flyers/feather_white.svg" alt="" data-bend="0">
+          <img class="fr" src="assets/flyers/feather_white_bend_m100.svg" alt="" data-bend="-2">
+          <img class="fr" src="assets/flyers/feather_white_bend_m050.svg" alt="" data-bend="-1">
+          <img class="fr" src="assets/flyers/feather_white_bend_p050.svg" alt="" data-bend="1">
+          <img class="fr" src="assets/flyers/feather_white_bend_p100.svg" alt="" data-bend="2">
+        </div>
+        <div class="flyer-body">
+          <h3 data-i18n="flyers.feather.name">Feather</h3>
+          <p class="flyer-role" data-i18n="flyers.feather.role">The Natural</p>
+          <p data-i18n="flyers.feather.body">Elegant, responsive and forgiving. The Feather rewards precise steering and well-timed Gusts — the flyer for chasing records through the Meadow, the Forest and up past the Sunset.</p>
+          <ul class="flyer-stats">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg><span data-i18n="flyers.feather.s1">Balanced lift</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-tilt"/></svg><span data-i18n="flyers.feather.s2">Good steering</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-perfect"/></svg><span data-i18n="flyers.feather.s3">Perfect Gusts</span></li>
+          </ul>
+          <ul class="flyer-skins" aria-label="Skins">
+            <li><img src="assets/skins/feather_white.svg" alt="Feather · White"></li>
+            <li><img src="assets/skins/feather_peacock.svg" alt="Feather · Peacock"></li>
+            <li><img src="assets/skins/feather_ice.svg" alt="Feather · Ice"></li>
+            <li><img src="assets/skins/feather_golden.svg" alt="Feather · Golden"></li>
+            <li><img src="assets/skins/feather_galaxy.svg" alt="Feather · Galaxy"></li>
+          </ul>
+        </div>
+      </article>
+      <article class="flyer is-bubble rv" data-tilt style="--rd:.1s">
+        <div class="flyer-sky" data-px="0.12" aria-hidden="true">
+          <img src="assets/world/cloud_bubble_01.svg" alt="" style="--l:50%;--t:10%;--w:58%;--o:.85">
+          <img src="assets/world/cloud_bubble_02.svg" alt="" style="--l:-16%;--t:44%;--w:62%;--o:.9">
+        </div>
+        <div class="flyer-art" data-px="-0.07" data-flyer="bubble" style="--aw:58%">
+          <img class="fx-bob" src="assets/flyers/bubble_classic.svg" alt="">
+        </div>
+        <div class="flyer-body">
+          <h3 data-i18n="flyers.bubble.name">Bubble</h3>
+          <p class="flyer-role" data-i18n="flyers.bubble.role">The Dreamer</p>
+          <p data-i18n="flyers.bubble.body">Ultra light and sensitive to every breath. Three touches and it pops, so the Bubble is about planning ahead and threading the narrow gaps between the floating isles.</p>
+          <ul class="flyer-stats">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg><span data-i18n="flyers.bubble.s1">High lift</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-near_miss"/></svg><span data-i18n="flyers.bubble.s2">Very drifty</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-bubble"/></svg><span data-i18n="flyers.bubble.s3">Three lives</span></li>
+          </ul>
+          <ul class="flyer-skins" aria-label="Skins">
+            <li><img src="assets/skins/bubble_classic.svg" alt="Bubble · Classic"></li>
+            <li><img src="assets/skins/bubble_rainbow.svg" alt="Bubble · Rainbow"></li>
+            <li><img src="assets/skins/bubble_pearl.svg" alt="Bubble · Pearl"></li>
+            <li><img src="assets/skins/bubble_neon.svg" alt="Bubble · Neon"></li>
+            <li><img src="assets/skins/bubble_galaxy.svg" alt="Bubble · Galaxy"></li>
+          </ul>
+        </div>
+      </article>
+      <article class="flyer is-snowflake rv" data-tilt style="--rd:.2s">
+        <div class="flyer-sky" data-px="0.12" aria-hidden="true">
+          <img src="assets/world/stars.svg" alt="" style="--l:0;--t:0;--w:100%;--o:.7">
+          <img src="assets/world/snow_cloud_01.svg" alt="" style="--l:-14%;--t:46%;--w:70%;--o:.9">
+        </div>
+        <div class="flyer-art" data-px="-0.07" data-flyer="snowflake" style="--aw:54%">
+          <img class="fx-spin" src="assets/flyers/snowflake_classic.svg" alt="">
+        </div>
+        <div class="flyer-body">
+          <h3 data-i18n="flyers.snowflake.name">Snowflake</h3>
+          <p class="flyer-role" data-i18n="flyers.snowflake.role">The Wind Dancer</p>
+          <p data-i18n="flyers.snowflake.body">Don’t force it through the world — dance with the wind. The Snowflake falls slowly, spirals in crosswinds and loves a good current, all the way from the Snowy Forest to the Aurora Sky.</p>
+          <ul class="flyer-stats">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-snowflake"/></svg><span data-i18n="flyers.snowflake.s1">Slow fall</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-slipstream"/></svg><span data-i18n="flyers.snowflake.s2">Spiral drift</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-wind"/></svg><span data-i18n="flyers.snowflake.s3">Rides the currents</span></li>
+          </ul>
+          <ul class="flyer-skins" aria-label="Skins">
+            <li><img src="assets/skins/snowflake_classic.svg" alt="Snowflake · Classic"></li>
+            <li><img src="assets/skins/snowflake_frost.svg" alt="Snowflake · Frost"></li>
+            <li><img src="assets/skins/snowflake_crystal.svg" alt="Snowflake · Crystal"></li>
+            <li><img src="assets/skins/snowflake_aurora.svg" alt="Snowflake · Aurora"></li>
+            <li><img src="assets/skins/snowflake_golden.svg" alt="Snowflake · Golden"></li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <p class="flyers-note rv"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span data-i18n="flyers.note">Skins and trails are cosmetic only — same physics for everyone.</span></p>
+    <div class="inline-cta rv">
+      <div>
+        <p class="inline-cta-title" data-i18n="flyers.cta">Pick a flyer and take a breath.</p>
+        <p class="inline-cta-sub" data-i18n="flyers.ctaSub">Free on Google Play · Android 8.0 and newer</p>
+      </div>
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=si.updraft" data-play rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="hero.cta">Get it on Google Play</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="seam" aria-hidden="true">
+  <div class="cloud-divider cd-warm">
+    <div class="cdl" data-px="0.22"><img src="assets/world/clouds_bank_01.svg" alt="" style="--l:3%;--w:15%;--b:46%;--dd:120s;--o:0.7"><img src="assets/world/clouds_bank_03.svg" alt="" style="--l:38%;--w:17%;--b:50%;--dd:150s;--o:0.7"><img src="assets/world/clouds_bank_01.svg" alt="" style="--l:74%;--w:15%;--b:44%;--dd:135s;--o:0.7"></div>
+    <div class="cdl" data-px="0.06"><img src="assets/world/clouds_bank_golden_02.svg" alt="" style="--l:-3%;--w:20%;--b:18%;--dd:100s"><img src="assets/world/clouds_bank_golden_03.svg" alt="" style="--l:30%;--w:22%;--b:22%;--dd:115s"><img src="assets/world/clouds_bank_golden_02.svg" alt="" style="--l:62%;--w:20%;--b:16%;--dd:95s"><img src="assets/world/clouds_bank_golden_01.svg" alt="" style="--l:86%;--w:18%;--b:20%;--dd:125s"></div>
+    <div class="cdl" data-px="-0.16"><img src="assets/world/clouds_bank_golden_01.svg" alt="" style="--l:10%;--w:24%;--b:-12%;--dd:110s"><img src="assets/world/clouds_bank_02.svg" alt="" style="--l:44%;--w:22%;--b:-16%;--dd:130s"><img src="assets/world/clouds_bank_golden_03.svg" alt="" style="--l:76%;--w:26%;--b:-10%;--dd:90s"></div>
+  </div>
+</div>
+
+<!-- ======================================================= WORLDS -->
+<section class="s-worlds light" id="worlds">
+  <div class="wrap worlds-head">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="worlds.eyebrow">Worlds</span>
+      <h2 class="h2 split" data-i18n="worlds.title">Three worlds. Fifteen skies.</h2>
+      <p class="lead" data-i18n="worlds.lead">Each flyer climbs its own world, biome by biome, and the world scrolls down as you rise. Scroll to ascend.</p>
+    </div>
+    <div class="worlds-tabs rv" role="tablist" aria-label="Worlds">
+      <button class="wtab" type="button" role="tab" aria-selected="true" data-world="feather"><svg class="icon" aria-hidden="true"><use href="#i-feather"/></svg><span data-i18n="worlds.tab.feather">Feather’s world</span></button>
+      <button class="wtab" type="button" role="tab" aria-selected="false" data-world="bubble"><svg class="icon" aria-hidden="true"><use href="#i-bubble"/></svg><span data-i18n="worlds.tab.bubble">Bubble’s world</span></button>
+      <button class="wtab" type="button" role="tab" aria-selected="false" data-world="winter"><svg class="icon" aria-hidden="true"><use href="#i-snowflake"/></svg><span data-i18n="worlds.tab.winter">Winter Winds</span></button>
+    </div>
+  </div>
+  <div class="journey-track" id="journey">
+    <div class="journey-stage wrap">
+      <div class="journey-clouds" aria-hidden="true">
+        <img src="assets/world/cloud_soft_01.svg" alt="" data-jk="0.35" data-jy="0.08" style="--l:0%;--w:16%">
+        <img src="assets/world/cloud_soft_03.svg" alt="" data-jk="0.6" data-jy="0.32" style="--l:84%;--w:14%">
+        <img src="assets/world/cloud_soft_02.svg" alt="" data-jk="0.45" data-jy="0.62" style="--l:4%;--w:12%">
+        <img src="assets/world/clouds_bank_01.svg" alt="" data-jk="0.8" data-jy="0.8" style="--l:76%;--w:24%">
+      </div>
+      <ol class="journey-list" id="journey-list" aria-hidden="true"></ol>
+      <div class="journey-phone">
+        <div class="phone"><div class="phone-screen">
+          <img class="lyr is-on" id="journey-a" src="assets/biomes/meadow.svg" alt="" width="390" height="844">
+          <img class="lyr" id="journey-b" src="assets/biomes/forest.svg" alt="" width="390" height="844">
+        </div></div>
+        <div class="phone-hud" aria-hidden="true">
+          <div class="hud-alt num"><span id="journey-alt">0</span><small>m</small></div>
+          <div class="journey-caption"><span class="wname" id="journey-world">Feather’s world</span><span class="bname" id="journey-biome">Meadow</span></div>
+        </div>
+      </div>
+      <div class="journey-side rv">
+        <p class="k" id="journey-k" data-i18n="worlds.k.feather">From the meadow to the high sky.</p>
+        <p data-i18n="worlds.side">Every biome brings its own light, its own wind and its own hazards — branches, birds, webs, falling drops, crosswinds and more.</p>
+        <span class="hint"><svg class="icon" aria-hidden="true"><use href="#i-chevron_down"/></svg><span data-i18n="worlds.hint">Keep scrolling</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="journey-grid wrap" id="journey-grid">
+    <figure><img src="assets/biomes/meadow.webp" alt="Meadow" width="390" height="844" loading="lazy"><figcaption>Meadow</figcaption></figure>
+    <figure><img src="assets/biomes/forest.webp" alt="Forest" width="390" height="844" loading="lazy"><figcaption>Forest</figcaption></figure>
+    <figure><img src="assets/biomes/treetops.webp" alt="Tree Tops" width="390" height="844" loading="lazy"><figcaption>Tree Tops</figcaption></figure>
+    <figure><img src="assets/biomes/clouds.webp" alt="Clouds" width="390" height="844" loading="lazy"><figcaption>Clouds</figcaption></figure>
+    <figure><img src="assets/biomes/sunset.webp" alt="Sunset" width="390" height="844" loading="lazy"><figcaption>Sunset</figcaption></figure>
+    <figure><img src="assets/biomes/highsky.webp" alt="High Sky" width="390" height="844" loading="lazy"><figcaption>High Sky</figcaption></figure>
+    <figure><img src="assets/biomes/lagoon.webp" alt="Bubble Lagoon" width="390" height="844" loading="lazy"><figcaption>Bubble Lagoon</figcaption></figure>
+    <figure><img src="assets/biomes/isles.webp" alt="Floating Isles" width="390" height="844" loading="lazy"><figcaption>Floating Isles</figcaption></figure>
+    <figure><img src="assets/biomes/prism.webp" alt="Prism Sky" width="390" height="844" loading="lazy"><figcaption>Prism Sky</figcaption></figure>
+    <figure><img src="assets/biomes/moonbow.webp" alt="Moonbow Sky" width="390" height="844" loading="lazy"><figcaption>Moonbow Sky</figcaption></figure>
+    <figure><img src="assets/biomes/snowyforest.webp" alt="Snowy Forest" width="390" height="844" loading="lazy"><figcaption>Snowy Forest</figcaption></figure>
+    <figure><img src="assets/biomes/village.webp" alt="Winter Village" width="390" height="844" loading="lazy"><figcaption>Winter Village</figcaption></figure>
+    <figure><img src="assets/biomes/rooftops.webp" alt="Rooftops &amp; Chimneys" width="390" height="844" loading="lazy"><figcaption>Rooftops &amp; Chimneys</figcaption></figure>
+    <figure><img src="assets/biomes/snowclouds.webp" alt="Snow Clouds" width="390" height="844" loading="lazy"><figcaption>Snow Clouds</figcaption></figure>
+    <figure><img src="assets/biomes/aurora.webp" alt="Aurora Sky" width="390" height="844" loading="lazy"><figcaption>Aurora Sky</figcaption></figure>
+  </div>
+</section>
+
+<div class="seam" aria-hidden="true">
+  <div class="cloud-divider cd-snow">
+    <div class="cdl" data-px="0.22"><img src="assets/world/snow_cloud_02.svg" alt="" style="--l:4%;--w:15%;--b:46%;--dd:120s;--o:0.7"><img src="assets/world/snow_cloud_03.svg" alt="" style="--l:40%;--w:17%;--b:50%;--dd:150s;--o:0.7"><img src="assets/world/snow_cloud_02.svg" alt="" style="--l:76%;--w:15%;--b:44%;--dd:135s;--o:0.7"></div>
+    <div class="cdl" data-px="0.06"><img src="assets/world/snow_cloud_01.svg" alt="" style="--l:-4%;--w:21%;--b:18%;--dd:100s"><img src="assets/world/snow_cloud_02.svg" alt="" style="--l:28%;--w:20%;--b:22%;--dd:115s"><img src="assets/world/snow_cloud_03.svg" alt="" style="--l:58%;--w:22%;--b:16%;--dd:95s"><img src="assets/world/snow_cloud_01.svg" alt="" style="--l:86%;--w:18%;--b:20%;--dd:125s"></div>
+    <div class="cdl" data-px="-0.16"><img src="assets/world/snow_cloud_03.svg" alt="" style="--l:8%;--w:26%;--b:-12%;--dd:110s"><img src="assets/world/snow_cloud_01.svg" alt="" style="--l:46%;--w:22%;--b:-16%;--dd:130s"><img src="assets/world/snow_cloud_02.svg" alt="" style="--l:78%;--w:24%;--b:-10%;--dd:90s"></div>
+  </div>
+</div>
+
+<!-- ======================================================= WINTER WINDS -->
+<section class="section s-winter" id="winter">
+  <div class="stars-layer twinkle-a" data-px="0.35" aria-hidden="true"></div>
+  <div class="stars-layer twinkle-b" data-px="0.18" aria-hidden="true"></div>
+  <div class="wrap winter">
+    <div class="winter-copy rv">
+      <span class="winter-pill"><svg class="icon" aria-hidden="true"><use href="#i-gift"/></svg><span data-i18n="winter.pill">Seasonal event · December</span></span>
+      <img class="winter-logo" src="assets/brand/logo-winter.svg" alt="UPDRAFT — Winter Winds" width="1200" height="386">
+      <h2 class="h2 split" data-i18n="winter.title">Blow a snowflake through <em>Christmas Village</em>.</h2>
+      <p class="lead" data-i18n="winter.lead">The winter world is always there. In December the lights come on: Winter Winds brings warm windows, chimneys and garlands, gifts, bells and a sleigh crossing the moon.</p>
+      <ul class="winter-list">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-challenges"/></svg><span data-i18n="winter.l1"><b>Seasonal challenges.</b> Winter-heavy daily challenges and a seasonal leaderboard.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-trail"/></svg><span data-i18n="winter.l2"><b>Limited cosmetics.</b> Event skins, winter trails and badges you can only earn while the snow falls.</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-music_on"/></svg><span data-i18n="winter.l3"><b>Festive atmosphere.</b> Warm winter music, snow, bells and the aurora over the rooftops.</span></li>
+      </ul>
+    </div>
+    <div class="winter-scene rv" id="winter-scene" aria-label="Christmas Village" role="img">
+      <svg class="scene" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 390 844"><defs><linearGradient id="bmvillage-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A1330"/><stop offset="0.33" stop-color="#142250"/><stop offset="0.67" stop-color="#213567"/><stop offset="1" stop-color="#2C4377"/></linearGradient><filter id="bmvillage-au-b" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2"/></filter><filter id="bmvillage-au-b6" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6"/></filter><filter id="bmvillage-au-b10" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="10"/></filter><linearGradient id="bmvillage-au-a1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7BF2D6" stop-opacity="0.9"/><stop offset="1" stop-color="#3FD0B5" stop-opacity="0"/></linearGradient><linearGradient id="bmvillage-au-a2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B394FF" stop-opacity="0.8"/><stop offset="1" stop-color="#5F7BEA" stop-opacity="0"/></linearGradient><linearGradient id="bmvillage-au-a3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FF2A8" stop-opacity="0.7"/><stop offset="1" stop-color="#3FD07F" stop-opacity="0"/></linearGradient><filter id="bmvillage-st-g" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><radialGradient id="bmvillage-mo-mh" cx="0.5" cy="0.5" r="0.5"><stop offset="0.45" stop-color="#FFE7B0" stop-opacity="0.5"/><stop offset="0.7" stop-color="#FFE7B0" stop-opacity="0.16"/><stop offset="1" stop-color="#FFE7B0" stop-opacity="0"/></radialGradient><radialGradient id="bmvillage-mo-m" cx="0.4" cy="0.38" r="0.7"><stop offset="0" stop-color="#FFFBEE"/><stop offset="0.7" stop-color="#FFF0C8"/><stop offset="1" stop-color="#F6D898"/></radialGradient><g id="bmvillage-sa-rein"><path d="M5,2.8 L10.2,8.8 M3.6,3 L5.6,9.8 M-5,2.8 L-10.4,8.6 M-3.6,3 L-2,9.8" fill="none" stroke="#5E3F2B" stroke-width="1.5" stroke-linecap="round"/><path d="M-9,-2 L-11.6,-5.4" fill="none" stroke="#5E3F2B" stroke-width="1.3" stroke-linecap="round"/><ellipse rx="9.4" ry="4" fill="#7A5236"/><ellipse cy="1.6" rx="6.8" ry="2.4" fill="#A8795A" opacity="0.75"/><path d="M7,-2 L12,-8" fill="none" stroke="#7A5236" stroke-width="3.4" stroke-linecap="round"/><ellipse cx="13.6" cy="-9.6" rx="3.4" ry="2.1" fill="#7A5236"/><circle cx="16" cy="-9.2" r="1.3" fill="#A8795A"/><path d="M12,-11.2 L9.8,-16.4 M10.6,-14 L8.4,-15.2 M14.4,-11.6 L16.4,-16.6 M15.4,-14.2 L17.6,-15" fill="none" stroke="#D9B98A" stroke-width="1" stroke-linecap="round"/><path d="M-3.4,-4.2 C0,-5.4 3.4,-5.4 6.4,-4.2" fill="none" stroke="#C8323A" stroke-width="1.1" stroke-linecap="round"/><circle cx="1.4" cy="3.6" r="0.9" fill="#F2C56B"/></g><g id="bmvillage-sa-sleigh"><path d="M-15,11 L13,11 C17,11 18,7 15,6" fill="none" stroke="#E8B65A" stroke-width="1.6" stroke-linecap="round"/><path d="M-9,7 L-10,11 M7,7 L8,11" fill="none" stroke="#E8B65A" stroke-width="1.2" stroke-linecap="round"/><circle cx="-10" cy="-10" r="4.8" fill="#7A5A3A"/><rect x="-12.6" y="-12" width="3.2" height="3.2" fill="#1F5A3A"/><path d="M-15,-9 C-18,-12 -14,-16 -11,-13 L-8,-3 L9,-3 C13,-3 14,0 13,4 L11,7 L-12,7 C-14,7 -15,5 -15,3 Z" fill="#C0303A"/><path d="M-12,-1 L8,-1 C10.6,-1 11.4,1.6 10.6,4 L9.6,6 L-11,6 Z" fill="#9A2230"/><path d="M-15,-9 C-18,-12 -14,-16 -11,-13 L-8,-3 L9,-3 C13,-3 14,0 13,4 L11,7 L-12,7 C-14,7 -15,5 -15,3 Z" fill="none" stroke="#E8B65A" stroke-width="0.8"/><path d="M-5.2,-7 L1.6,-7 L2.6,-3 L-6.2,-3 Z" fill="#C8323A"/><path d="M-5.6,-4.6 L2,-4.6" stroke="#1A1410" stroke-width="0.9"/><path d="M-4.4,-8 C-3.6,-5.2 -0.8,-5.2 0.4,-8 Z" fill="#FFF8EE"/><circle cx="-2" cy="-9.2" r="2.3" fill="#F4E9DE"/><path d="M-4.6,-10 L0.6,-10 L-1.2,-15.6 Z" fill="#C8323A"/><path d="M-4.8,-9.8 L0.8,-9.8" stroke="#FFF8EE" stroke-width="1.3" stroke-linecap="round"/><circle cx="-1.2" cy="-15.8" r="1.1" fill="#FFF8EE"/></g><radialGradient id="bmvillage-h1-win" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFB84D" stop-opacity="0.5"/><stop offset="1" stop-color="#FFB84D" stop-opacity="0"/></radialGradient><radialGradient id="bmvillage-h2-win" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#FFB84D" stop-opacity="0.5"/><stop offset="1" stop-color="#FFB84D" stop-opacity="0"/></radialGradient><filter id="bmvillage-xt-g" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><filter id="bmvillage-ga-g" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter><linearGradient id="bmvillage-gr-sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FB4DD"/><stop offset="0.3" stop-color="#6A80B6"/><stop offset="1" stop-color="#2E4176"/></linearGradient><filter id="bmvillage-sn-b" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="2"/></filter><filter id="bmvillage-sn-b6" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6"/></filter><filter id="bmvillage-sn-b10" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="10"/></filter></defs><rect width="390" height="844" fill="url(#bmvillage-sky)"/><g opacity="0.8"><g filter="url(#bmvillage-au-b10)"><path d="M-20,150 C60,90 140,150 210,120 C280,90 330,60 410,90 L410,170 C330,140 280,180 210,210 C140,240 60,200 -20,250 Z" fill="url(#bmvillage-au-a1)" opacity="0.55"/><path d="M-20,240 C80,190 160,240 240,200 C300,170 350,160 410,180 L410,226 C350,212 300,226 240,262 C160,302 80,258 -20,296 Z" fill="url(#bmvillage-au-a2)" opacity="0.45"/><path d="M-20,60 C70,30 150,80 230,50 C300,26 350,40 410,30 L410,80 C340,90 300,80 230,110 C150,140 70,100 -20,130 Z" fill="url(#bmvillage-au-a3)" opacity="0.35"/></g></g><g opacity="0.8"><g fill="#EAF2FF"><circle cx="242.93" cy="626.07" r="1.04" opacity="0.97"/><circle cx="288.56" cy="778.44" r="0.42" opacity="0.68"/><circle cx="367.91" cy="547.73" r="1.12" opacity="0.47"/><circle cx="182.94" cy="208.11" r="0.84" opacity="0.74"/><circle cx="5.11" cy="182.92" r="0.62" opacity="0.95"/><circle cx="298.63" cy="134.71" r="1.04" opacity="0.48"/><circle cx="240.81" cy="106.93" r="0.4" opacity="0.92"/><circle cx="81.69" cy="181.87" r="1.19" opacity="0.92"/><circle cx="112.83" cy="811.49" r="0.83" opacity="0.81"/><circle cx="79.86" cy="794.18" r="0.95" opacity="0.98"/><circle cx="348.56" cy="252.18" r="0.69" opacity="0.5"/><circle cx="56.82" cy="54.98" r="0.64" opacity="0.76"/><circle cx="1.32" cy="572.18" r="0.67" opacity="0.59"/><circle cx="319.22" cy="405.75" r="0.65" opacity="0.69"/><circle cx="274.82" cy="48.11" r="1.18" opacity="0.41"/><circle cx="292.42" cy="713.08" r="0.41" opacity="0.87"/><circle cx="142.81" cy="488.27" r="0.41" opacity="0.43"/><circle cx="70.56" cy="806.17" r="0.56" opacity="0.85"/><circle cx="362.57" cy="795.08" r="0.68" opacity="0.61"/><circle cx="204.63" cy="654.61" r="0.49" opacity="0.85"/><circle cx="310.92" cy="725.58" r="0.43" opacity="0.97"/><circle cx="35.56" cy="287.59" r="0.89" opacity="0.95"/><circle cx="132.58" cy="780.02" r="0.84" opacity="0.59"/><circle cx="123.55" cy="149.79" r="0.46" opacity="0.49"/><circle cx="268.78" cy="841.24" r="0.53" opacity="0.43"/><circle cx="384.81" cy="450.3" r="0.72" opacity="0.54"/><circle cx="231.64" cy="697.39" r="0.76" opacity="0.65"/><circle cx="21.73" cy="773.16" r="0.43" opacity="0.7"/><circle cx="326.99" cy="110.2" r="0.99" opacity="0.97"/><circle cx="245.86" cy="665.08" r="0.49" opacity="0.66"/><circle cx="58.21" cy="712.96" r="0.64" opacity="0.67"/><circle cx="389.73" cy="719.3" r="1.18" opacity="0.67"/><circle cx="190.38" cy="615.7" r="0.78" opacity="0.57"/><circle cx="157.48" cy="123.65" r="0.7" opacity="0.99"/><circle cx="374.33" cy="529.16" r="0.8" opacity="0.6"/><circle cx="34.76" cy="229.83" r="1.03" opacity="0.92"/><circle cx="140.92" cy="663.4" r="1.02" opacity="0.82"/><circle cx="258.97" cy="641.14" r="0.69" opacity="0.82"/><circle cx="109.53" cy="409.92" r="1.02" opacity="0.81"/><circle cx="114.6" cy="798.04" r="0.92" opacity="0.75"/><circle cx="4.52" cy="461.66" r="0.6" opacity="0.8"/><circle cx="180.55" cy="689.28" r="0.92" opacity="0.88"/><circle cx="135.67" cy="543.59" r="0.99" opacity="0.9"/><circle cx="136.52" cy="711.39" r="1.1" opacity="0.81"/><circle cx="380.69" cy="807.3" r="0.81" opacity="0.72"/><circle cx="64.81" cy="706.11" r="1.15" opacity="0.69"/><circle cx="269.66" cy="607.42" r="0.98" opacity="0.5"/><circle cx="304.34" cy="490.23" r="0.93" opacity="0.65"/><circle cx="243.26" cy="653.85" r="0.91" opacity="0.83"/><circle cx="10.77" cy="135.06" r="0.75" opacity="0.79"/><circle cx="85.42" cy="578.95" r="0.9" opacity="0.43"/><circle cx="183.92" cy="190.95" r="0.44" opacity="0.48"/><circle cx="123.77" cy="153.23" r="0.55" opacity="0.42"/><circle cx="181.48" cy="320.97" r="0.89" opacity="0.75"/><circle cx="92.76" cy="762.29" r="0.4" opacity="0.64"/><circle cx="108.63" cy="346.08" r="0.49" opacity="0.9"/><circle cx="145.81" cy="30.44" r="0.89" opacity="0.46"/><circle cx="212.64" cy="286.43" r="0.86" opacity="0.97"/><circle cx="319.22" cy="353.72" r="1.05" opacity="0.79"/><circle cx="144.08" cy="119.94" r="0.88" opacity="0.74"/></g><g fill="#FFFFFF" filter="url(#bmvillage-st-g)"><path transform="translate(373.31 816.99)" d="M0,-3.37 Q0.57,-0.57 3.37,0 Q0.57,0.57 0,3.37 Q-0.57,0.57 -3.37,0 Q-0.57,-0.57 0,-3.37 Z"/><path transform="translate(136.94 754.09)" d="M0,-2.4 Q0.41,-0.41 2.4,0 Q0.41,0.41 0,2.4 Q-0.41,0.41 -2.4,0 Q-0.41,-0.41 0,-2.4 Z"/><path transform="translate(42.09 477.55)" d="M0,-3.38 Q0.58,-0.58 3.38,0 Q0.58,0.58 0,3.38 Q-0.58,0.58 -3.38,0 Q-0.58,-0.58 0,-3.38 Z"/><path transform="translate(54.87 531.26)" d="M0,-3.83 Q0.65,-0.65 3.83,0 Q0.65,0.65 0,3.83 Q-0.65,0.65 -3.83,0 Q-0.65,-0.65 0,-3.83 Z"/><path transform="translate(146.58 364.34)" d="M0,-2.76 Q0.47,-0.47 2.76,0 Q0.47,0.47 0,2.76 Q-0.47,0.47 -2.76,0 Q-0.47,-0.47 0,-2.76 Z"/><path transform="translate(113.68 820.75)" d="M0,-3.01 Q0.51,-0.51 3.01,0 Q0.51,0.51 0,3.01 Q-0.51,0.51 -3.01,0 Q-0.51,-0.51 0,-3.01 Z"/><path transform="translate(374.84 771.2)" d="M0,-3.35 Q0.57,-0.57 3.35,0 Q0.57,0.57 0,3.35 Q-0.57,0.57 -3.35,0 Q-0.57,-0.57 0,-3.35 Z"/></g></g><g transform="translate(190 40)"><circle cx="110" cy="110" r="104" fill="url(#bmvillage-mo-mh)"/><circle cx="110" cy="110" r="44" fill="url(#bmvillage-mo-m)"/><g fill="#E9D3A0" opacity="0.35"><circle cx="94" cy="96" r="7"/><circle cx="124" cy="126" r="5"/><circle cx="128" cy="94" r="3"/></g></g><g id="village-santa" transform="translate(60 270) scale(1.3)"><path transform="translate(-20 12)" d="M0,-2.4 Q0.41,-0.41 2.4,0 Q0.41,0.41 0,2.4 Q-0.41,0.41 -2.4,0 Q-0.41,-0.41 0,-2.4 Z" fill="#FFE3A3"/><path transform="translate(-29 14.5)" d="M0,-2 Q0.34,-0.34 2,0 Q0.34,0.34 0,2 Q-0.34,0.34 -2,0 Q-0.34,-0.34 0,-2 Z" fill="#FFE3A3"/><path transform="translate(-38 17)" d="M0,-1.6 Q0.27,-0.27 1.6,0 Q0.27,0.27 0,1.6 Q-0.27,0.27 -1.6,0 Q-0.27,-0.27 0,-1.6 Z" fill="#FFE3A3"/><path transform="translate(-47 19.5)" d="M0,-1.2 Q0.2,-0.2 1.2,0 Q0.2,0.2 0,1.2 Q-0.2,0.2 -1.2,0 Q-0.2,-0.2 0,-1.2 Z" fill="#FFE3A3"/><path d="M9,-6 C30,-12 60,-20 96,-33" fill="none" stroke="#D9B98A" stroke-width="0.8" opacity="0.9"/><use xlink:href="#bmvillage-sa-rein" transform="translate(30 -10)"/><use xlink:href="#bmvillage-sa-rein" transform="translate(52 -16)"/><use xlink:href="#bmvillage-sa-rein" transform="translate(74 -22)"/><use xlink:href="#bmvillage-sa-rein" transform="translate(96 -28)"/><circle cx="113.6" cy="-37.2" r="3.6" fill="#FF4B3E" opacity="0.4"/><circle cx="113.6" cy="-37.2" r="1.5" fill="#FF5A4A"/><use xlink:href="#bmvillage-sa-sleigh"/></g><g transform="translate(320 560) scale(0.8)"><g fill="#13214A"><rect x="-30" y="-60" width="60" height="60"/><path d="M-36,-58 L0,-88 L36,-58 Z"/><rect x="-12" y="-150" width="24" height="70"/><path d="M-16,-148 L0,-190 L16,-148 Z"/></g><path d="M-17,-149 L0,-191 L17,-149" fill="none" stroke="#DCE8F7" stroke-width="2.2"/><path d="M-37,-57 L0,-89 L37,-57" fill="none" stroke="#DCE8F7" stroke-width="2.4"/><circle cy="-118" r="6" fill="#FFC86E"/><path d="M0,-124 L0,-112 M-6,-118 L6,-118" stroke="#13214A" stroke-width="1"/><rect x="-6" y="-40" width="12" height="18" rx="6" fill="#FFC86E"/><path d="M0,-196 L0,-208 M-4,-202 L4,-202" stroke="#F2C56B" stroke-width="1.6"/></g><g transform="translate(0 500)"><g fill="#16245A"><rect x="-10" y="22.8" width="34.14" height="37.2"/><path d="M-13,22.8 L7.07,4.8 L27.14,22.8 Z"/><rect x="25.73" y="22.25" width="35.14" height="37.75"/><path d="M22.73,22.25 L43.3,4.25 L63.87,22.25 Z"/><rect x="63.01" y="18.14" width="37.34" height="41.86"/><path d="M60.01,18.14 L81.68,0.14 L103.35,18.14 Z"/><rect x="99.99" y="17.81" width="27.63" height="42.19"/><path d="M96.99,17.81 L113.81,-0.19 L130.63,17.81 Z"/><rect x="124.13" y="14.7" width="43.68" height="45.3"/><path d="M121.13,14.7 L145.97,-3.3 L170.81,14.7 Z"/><rect x="171.19" y="33.7" width="28.83" height="26.3"/><path d="M168.19,33.7 L185.61,15.7 L203.03,33.7 Z"/><rect x="196.74" y="29.16" width="29.42" height="30.84"/><path d="M193.74,29.16 L211.46,11.16 L229.17,29.16 Z"/><rect x="227.73" y="17.15" width="33.93" height="42.85"/><path d="M224.73,17.15 L244.7,-0.85 L264.66,17.15 Z"/><rect x="265.35" y="20.75" width="35" height="39.25"/><path d="M262.35,20.75 L282.85,2.75 L303.34,20.75 Z"/><rect x="299.68" y="14.09" width="43.96" height="45.91"/><path d="M296.68,14.09 L321.66,-3.91 L346.64,14.09 Z"/><rect x="348.13" y="29.41" width="31.67" height="30.59"/><path d="M345.13,29.41 L363.97,11.41 L382.81,29.41 Z"/><rect x="376.65" y="25.99" width="39.79" height="34.01"/><path d="M373.65,25.99 L396.55,7.99 L419.44,25.99 Z"/></g><g fill="#FFC86E" opacity="0.85"><rect x="38.03" y="37.35" width="5" height="6" rx="1"/><rect x="76.08" y="34.88" width="5" height="6" rx="1"/><rect x="109.66" y="34.68" width="5" height="6" rx="1"/><rect x="139.42" y="32.82" width="5" height="6" rx="1"/><rect x="181.29" y="44.22" width="5" height="6" rx="1"/><rect x="207.04" y="41.5" width="5" height="6" rx="1"/><rect x="239.61" y="34.29" width="5" height="6" rx="1"/><rect x="277.6" y="36.45" width="5" height="6" rx="1"/><rect x="359.22" y="41.64" width="5" height="6" rx="1"/></g><rect x="0" y="60" width="390" height="20" fill="#16245A"/></g><path d="M0,566 L40,540 L74,556 L120,520 L170,552 L214,526 L260,548 L300,522 L346,548 L390,530 L390,844 L0,844 Z" fill="#1B2B57"/><g transform="translate(54 700)"><circle cx="-19" cy="-44" r="26" fill="url(#bmvillage-h1-win)"/><circle cx="19" cy="-44" r="26" fill="url(#bmvillage-h1-win)"/><rect x="-38" y="-70" width="76" height="70" fill="#1E2B55"/><path d="M-44,-68 L0,-110 L44,-68 Z" fill="#A8262E"/><path d="M0,-110 L44,-68 L15.2,-68 Z" fill="#8A1E27"/><path d="M-46,-66 L0,-112 L46,-66 L39,-64 L0,-102 L-39,-64 Z" fill="#E8F1FB"/><rect x="-26" y="-52" width="14" height="17" rx="1.5" fill="#FFC86E"/><path d="M-19,-52 L-19,-35 M-26,-43.5 L-12,-43.5" stroke="#1E2B55" stroke-width="1.2"/><rect x="12" y="-52" width="14" height="17" rx="1.5" fill="#FFC86E"/><path d="M19,-52 L19,-35 M12,-43.5 L26,-43.5" stroke="#1E2B55" stroke-width="1.2"/><path d="M-6,0 L-6,-24 C-6,-30 6,-30 6,-24 L6,0 Z" fill="#FFB75A" opacity="0.92"/><circle cy="-16" r="4.4" fill="none" stroke="#1F5A3A" stroke-width="2.8"/></g><g transform="translate(252 700)"><circle cx="-25" cy="-62" r="26" fill="url(#bmvillage-h2-win)"/><circle cx="25" cy="-62" r="26" fill="url(#bmvillage-h2-win)"/><circle cx="-1" cy="-26" r="26" fill="url(#bmvillage-h2-win)"/><rect x="-44" y="-88" width="88" height="88" fill="#202E5A"/><path d="M-50,-86 L0,-128 L50,-86 Z" fill="#B02A31"/><path d="M0,-128 L50,-86 L17.6,-86 Z" fill="#8E2029"/><path d="M-52,-84 L0,-130 L52,-84 L45,-82 L0,-120 L-45,-82 Z" fill="#E8F1FB"/><rect x="-32" y="-70" width="14" height="17" rx="1.5" fill="#FFC86E"/><path d="M-25,-70 L-25,-53 M-32,-61.5 L-18,-61.5" stroke="#202E5A" stroke-width="1.2"/><rect x="18" y="-70" width="14" height="17" rx="1.5" fill="#FFC86E"/><path d="M25,-70 L25,-53 M18,-61.5 L32,-61.5" stroke="#202E5A" stroke-width="1.2"/><rect x="-8" y="-34" width="14" height="17" rx="1.5" fill="#FFC86E"/><path d="M-1,-34 L-1,-17 M-8,-25.5 L6,-25.5" stroke="#202E5A" stroke-width="1.2"/><path d="M-6,0 L-6,-24 C-6,-30 6,-30 6,-24 L6,0 Z" fill="#FFB75A" opacity="0.92"/><circle cy="-16" r="4.4" fill="none" stroke="#1F5A3A" stroke-width="2.8"/></g><g transform="translate(158 700)"><path d="M-40,0 L40,0 L0,-64 Z" fill="#163248"/><path d="M-32,-36 L32,-36 L0,-90 Z" fill="#17364D"/><path d="M-24,-68 L24,-68 L0,-112 Z" fill="#183A52"/><path d="M-40,0 L-28,-8 L-16,0 L0,-10 L16,0 L28,-8 L40,0 M-32,-36 L-20,-43 L-10,-36 L0,-44 L10,-36 L20,-43 L32,-36 M-24,-68 L-14,-74 L-6,-68 L0,-74 L6,-68 L14,-74 L24,-68" fill="none" stroke="#DCE8F7" stroke-width="2.4" stroke-linejoin="round"/><path d="M-30,-14 Q0,-4 32,-20 M-22,-52 Q0,-44 24,-58 M-16,-80 Q0,-74 18,-84" fill="none" stroke="#F2C56B" stroke-width="1.2"/><g filter="url(#bmvillage-xt-g)"><circle cx="-20" cy="-12" r="2" fill="#FF5A4E"/><circle cx="2" cy="-6" r="2" fill="#FFD27A"/><circle cx="24" cy="-16" r="2" fill="#5FE0C0"/><circle cx="-14" cy="-50" r="2" fill="#FFD27A"/><circle cx="8" cy="-46" r="2" fill="#FF5A4E"/><circle cx="-8" cy="-78" r="2" fill="#5FE0C0"/><circle cx="12" cy="-82" r="2" fill="#FF5A4E"/></g><g fill="#D8343C"><circle cx="-8" cy="-24" r="2.6"/><circle cx="18" cy="-28" r="2.4"/><circle cx="-6" cy="-60" r="2.2"/><circle cx="10" cy="-96" r="2"/></g><g transform="translate(0 -118)" filter="url(#bmvillage-xt-g)"><path d="M0,-7.8 Q1.33,-1.33 7.8,0 Q1.33,1.33 0,7.8 Q-1.33,1.33 -7.8,0 Q-1.33,-1.33 0,-7.8 Z" fill="#FFE3A3"/></g></g><g transform="translate(8 634)"><path d="M0,0 L4,0.17 L8,0.68 L12,1.49 L16,2.55 L20,3.77 L24,5.08 L28,6.39 L32,7.59 L36,8.62 L40,9.4 L44,9.87 L48,10 L52,9.78 L56,9.23 L60,8.39 L64,7.31 L68,6.07 L72,4.75 L76,3.45 L80,2.27 L84,1.27 L88,0.53 L92,0.1 L96,0.01 L100,0.27 L104,0.86 L108,1.74 L112,2.84 L116,4.1 L120,5.41 L124,6.7 L128,7.87 L132,8.84 L136,9.55 L140,9.93 L144,9.98 L148,9.67 L152,9.05 L156,8.14 L160,7.01 L164,5.74 L168,4.42 L172,3.14 L176,1.99 L180,1.05 L184,0.39 L188,0.04" fill="none" stroke="#0F1A3A" stroke-width="1"/><g filter="url(#bmvillage-ga-g)"><circle cx="8" cy="2.68" r="2.1" fill="#FF5A4E"/><circle cx="24" cy="7.08" r="2.1" fill="#FFD27A"/><circle cx="40" cy="11.4" r="2.1" fill="#5FE0C0"/><circle cx="56" cy="11.23" r="2.1" fill="#F4FBFF"/><circle cx="72" cy="6.75" r="2.1" fill="#FF5A4E"/><circle cx="88" cy="2.53" r="2.1" fill="#FFD27A"/><circle cx="104" cy="2.86" r="2.1" fill="#5FE0C0"/><circle cx="120" cy="7.41" r="2.1" fill="#F4FBFF"/><circle cx="136" cy="11.55" r="2.1" fill="#FF5A4E"/><circle cx="152" cy="11.05" r="2.1" fill="#FFD27A"/><circle cx="168" cy="6.42" r="2.1" fill="#5FE0C0"/><circle cx="184" cy="2.39" r="2.1" fill="#F4FBFF"/></g></g><g transform="translate(0 694)"><path d="M0,10 C80,0 160,6 240,12 C300,16 350,6 390,2 L390,160 L0,160 Z" fill="url(#bmvillage-gr-sg)"/><path d="M0,10 C80,0 160,6 240,12 C300,16 350,6 390,2" fill="none" stroke="#DCE8F7" stroke-width="2"/><path d="M0,76 C80,66 160,72 240,78 C300,82 350,72 390,68 L390,160 L0,160 Z" fill="#2E4176"/></g><g transform="translate(110 716)"><circle cy="-50" r="16" fill="#FFC56A" opacity="0.16"/><rect x="-1.4" y="-44" width="2.8" height="44" fill="#0F1A3A"/><rect x="-5" y="-2" width="10" height="2.4" rx="1" fill="#0F1A3A"/><path d="M-5,-44 L5,-44 L4,-56 L-4,-56 Z" fill="#0F1A3A"/><rect x="-3.2" y="-54.4" width="6.4" height="9" fill="#FFC56A"/><path d="M-5.6,-56 L5.6,-56 L0,-61 Z" fill="#0F1A3A"/><path d="M-5.6,-56.5 L5.6,-56.5" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/><circle cy="-30" r="4.6" fill="none" stroke="#1F5A3A" stroke-width="2.4"/><circle cy="-25.6" r="1.4" fill="#C8323A"/></g><g fill="#FFFFFF"><circle cx="92.81" cy="459.33" r="1.57" opacity="0.77"/><circle cx="244.03" cy="55.31" r="1.21" opacity="0.88"/><circle cx="101.15" cy="197.78" r="2.2" opacity="0.71"/><circle cx="326.22" cy="402.04" r="1.84" opacity="0.57"/><circle cx="247.6" cy="732.63" r="1.72" opacity="0.83"/><circle cx="261.85" cy="54.04" r="1.96" opacity="0.77"/><circle cx="117.49" cy="26.17" r="2.07" opacity="0.71"/><circle cx="280.34" cy="741.72" r="1.91" opacity="0.91"/><circle cx="154.04" cy="675.97" r="1.64" opacity="0.92"/><circle cx="342.76" cy="82.25" r="1.34" opacity="0.6"/><circle cx="376.54" cy="368.12" r="1.83" opacity="0.64"/><circle cx="197.82" cy="325.67" r="1.55" opacity="0.76"/><circle cx="227.86" cy="763.15" r="1.88" opacity="0.92"/><circle cx="334" cy="836.4" r="1.87" opacity="0.57"/><circle cx="335.65" cy="814.15" r="2.1" opacity="0.76"/><circle cx="278.39" cy="178.19" r="2.03" opacity="0.76"/><circle cx="111.13" cy="53.56" r="2.05" opacity="0.95"/><circle cx="34.52" cy="675.7" r="1.61" opacity="0.57"/><circle cx="114.62" cy="648.86" r="2.07" opacity="0.52"/><circle cx="239.67" cy="37.93" r="1.92" opacity="0.65"/><circle cx="343.55" cy="827.66" r="1.71" opacity="0.95"/><circle cx="120.77" cy="64.96" r="1.8" opacity="0.51"/><circle cx="76.98" cy="344.3" r="1.81" opacity="0.57"/><circle cx="16.55" cy="732.41" r="1.51" opacity="0.93"/><circle cx="349.7" cy="318.85" r="1.66" opacity="0.73"/><circle cx="251.12" cy="502.73" r="1.76" opacity="0.78"/><circle cx="366.84" cy="427.93" r="1.63" opacity="0.82"/><circle cx="92.68" cy="254.12" r="2.18" opacity="0.73"/><circle cx="213.89" cy="9.67" r="1.62" opacity="0.76"/><circle cx="7.82" cy="519.73" r="1.83" opacity="0.53"/><circle cx="244.66" cy="393.52" r="1.88" opacity="0.66"/><circle cx="275.71" cy="622.9" r="1.22" opacity="0.53"/><circle cx="263.65" cy="813.03" r="1.45" opacity="0.71"/><circle cx="231.14" cy="270.1" r="1.56" opacity="0.64"/><circle cx="143.97" cy="502.7" r="1.5" opacity="0.67"/><circle cx="301.19" cy="22.72" r="1.77" opacity="0.83"/><circle cx="120.91" cy="187.82" r="2" opacity="0.61"/><circle cx="73.08" cy="367.34" r="1.9" opacity="0.55"/><circle cx="125.57" cy="281.69" r="2.03" opacity="0.7"/><circle cx="333.66" cy="142.88" r="1.54" opacity="0.79"/><circle cx="345.11" cy="380.73" r="1.43" opacity="0.55"/><circle cx="206.55" cy="161.04" r="2.01" opacity="0.88"/><circle cx="71.6" cy="235.13" r="2.01" opacity="0.79"/><circle cx="314.44" cy="291.42" r="1.33" opacity="0.63"/><circle cx="309.61" cy="228.87" r="1.55" opacity="0.69"/></g></svg>
+      <canvas id="winter-snow" aria-hidden="true"></canvas>
+      <div class="pxl" data-px="-0.08" aria-hidden="true"><img class="wring" src="assets/world/pos_ring_winter.svg" alt=""></div>
+      <div class="pxl" data-px="-0.16" aria-hidden="true"><img class="winter-flake" src="assets/flyers/snowflake_christmas.svg" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= EVERY DAY -->
+<section class="section s-daily" id="daily">
+  <div class="stars-layer twinkle-b dim" data-px="0.3" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" data-i18n="daily.eyebrow">Every day</span>
+      <h2 class="h2 split" data-i18n="daily.title">A new challenge every day.</h2>
+      <p class="lead" data-i18n="daily.lead">Short runs, long progression. There is always a reason to come back for one more breath.</p>
+    </div>
+    <div class="daily-grid">
+      <div class="daily-card rv" style="--rd:.05s"><svg class="icon" aria-hidden="true"><use href="#i-challenges"/></svg><h3 data-i18n="daily.c1.title">Daily Challenge</h3><p data-i18n="daily.c1.body">One seed, one run, one board. Everyone flies the same sky today — see where you land.</p></div>
+      <div class="daily-card rv" style="--rd:.12s"><svg class="icon" aria-hidden="true"><use href="#i-missions"/></svg><h3 data-i18n="daily.c2.title">Missions &amp; chests</h3><p data-i18n="daily.c2.body">Daily missions and a daily chest feed your Wind Dust, your XP and your level.</p></div>
+      <div class="daily-card rv" style="--rd:.19s"><svg class="icon" aria-hidden="true"><use href="#i-collection"/></svg><h3 data-i18n="daily.c3.title">Collection</h3><p data-i18n="daily.c3.body">Skins, trails and badges for every flyer. Earn them with Wind Dust or pick one up in the small shop.</p></div>
+      <div class="daily-card rv" style="--rd:.26s"><svg class="icon" aria-hidden="true"><use href="#i-leaderboard"/></svg><h3 data-i18n="daily.c4.title">Leaderboards</h3><p data-i18n="daily.c4.body">Google Play Games leaderboards and achievements, plus share cards to challenge a friend to beat your run.</p></div>
+    </div>
+  </div>
+  <div class="marquee rv" aria-hidden="true">
+    <div class="marquee-track" id="marquee-track">
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/home.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.home">Home</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/hud-feather.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.hud-feather">Feather run</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/hud-bubble.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.hud-bubble">Bubble run</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/results-feather.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.results-feather">Results</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/dailychallenge.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.dailychallenge">Daily Challenge</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/collection.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.collection">Collection</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/winterhome.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.winterhome">Winter Winds</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/hud-snowflake.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.hud-snowflake">Snowflake run</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/leaderboard.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.leaderboard">Leaderboard</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/skinunlocked.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.skinunlocked">Skin unlocked</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/ready.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.ready">Ready</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/missions.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.missions">Missions</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/home.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.home">Home</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/hud-feather.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.hud-feather">Feather run</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/hud-bubble.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.hud-bubble">Bubble run</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/results-feather.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.results-feather">Results</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/dailychallenge.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.dailychallenge">Daily Challenge</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/collection.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.collection">Collection</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/winterhome.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.winterhome">Winter Winds</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/hud-snowflake.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.hud-snowflake">Snowflake run</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/leaderboard.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.leaderboard">Leaderboard</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/skinunlocked.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.skinunlocked">Skin unlocked</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/ready.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.ready">Ready</figcaption></figure>
+      <figure><div class="phone"><div class="phone-screen"><img src="assets/screens/missions.webp" alt="" width="520" height="1126" loading="lazy"></div></div><figcaption data-i18n="shot.missions">Missions</figcaption></figure>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= PRIVACY STRIP -->
+<section class="section s-privacy" id="privacy">
+  <div class="wrap">
+    <div class="privacy-strip rv">
+      <span class="pic"><svg class="icon" aria-hidden="true"><use href="#i-privacy"/></svg></span>
+      <div>
+        <h3 data-i18n="privacy.title">Your breath stays on your phone.</h3>
+        <p data-i18n="privacy.body">The microphone is only open while you fly. Audio is analysed on the device and never recorded, stored or sent anywhere. Rewarded ads are optional and capped; there are no banners and no interstitials.</p>
+      </div>
+      <a class="btn btn-ghost btn-sm" href="privacy.html"><span data-i18n="privacy.cta">Privacy policy</span><svg class="icon" aria-hidden="true"><use href="#i-chevron_right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= DOWNLOAD -->
+<section class="section s-cta" id="download">
+  <div class="stars-layer twinkle-a" data-px="0.4" aria-hidden="true"></div>
+  <div class="stars-layer twinkle-b" data-px="0.2" aria-hidden="true"></div>
+  <div class="cta-flyer-wrap" data-px="-0.3" data-pxx="0.22" aria-hidden="true"><img class="cta-flyer" src="assets/flyers/feather_golden.svg" alt=""></div>
+  <div class="wrap cta">
+    <div class="cta-copy rv">
+      <span class="eyebrow" data-i18n="cta.eyebrow">Ready when you are</span>
+      <h2 class="h2 split" data-i18n="cta.title">How high can you go?</h2>
+      <p class="lead" data-i18n="cta.lead">Free on Google Play for Android 8.0 and newer. Take a breath.</p>
+      <div class="cta-buttons">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=si.updraft" data-play data-play-badge rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="cta.btn">Get it on Google Play</span></a>
+        <a class="btn btn-ghost" href="support.html"><span data-i18n="cta.btn2">Support</span></a>
+      </div>
+      <p class="cta-link"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg><span data-i18n="cta.link">Store link:</span> <a href="https://play.google.com/store/apps/details?id=si.updraft" data-play data-play-text rel="noopener">play.google.com/store/apps/details?id=si.updraft</a></p>
+      <ul class="cta-meta">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="cta.m1">Free to play</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-ad"/></svg><span data-i18n="cta.m2">Optional rewarded ads only</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-shop"/></svg><span data-i18n="cta.m3">Small cosmetic shop</span></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="cta.m4">Android 8.0+</span></li>
+      </ul>
+    </div>
+    <div class="cta-qr-wrap" data-px="0.1">
+      <a class="cta-qr rv" href="https://play.google.com/store/apps/details?id=si.updraft" data-play rel="noopener" style="--rd:.15s">
+        <img src="assets/brand/qr-play.svg" alt="QR code for the Google Play listing" width="222" height="222">
+        <span data-i18n="cta.qr">Scan to open Google Play</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+  <div class="sticky-inner">
+    <img src="assets/brand/icon-192.png" alt="" width="44" height="44">
+    <div class="sticky-text"><strong>UPDRAFT</strong><span data-i18n="sticky.sub">Free on Google Play</span></div>
+    <a class="btn btn-primary btn-sm" href="https://play.google.com/store/apps/details?id=si.updraft" data-play rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="sticky.cta">Get it</span></a>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src="assets/brand/wordmark.svg" alt="UPDRAFT" width="1200" height="300">
+      <p data-i18n="hero.title">A small breath. A big adventure.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#flyers" data-i18n="nav.flyers">Flyers</a>
+      <a href="#worlds" data-i18n="nav.worlds">Worlds</a>
+      <a href="privacy.html" data-i18n="footer.privacy">Privacy</a>
+      <a href="support.html" data-i18n="footer.support">Support</a>
+      <a href="https://play.google.com/store/apps/details?id=si.updraft" data-play rel="noopener">Google Play</a>
+    </nav>
+    <div class="footer-legal">
+      <span data-i18n="footer.copy">© 2026 UPDRAFT. All rights reserved.</span>
+      <span data-i18n="footer.tm">Google Play is a trademark of Google LLC.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/strings.js"></script>
+<script src="js/biomes.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

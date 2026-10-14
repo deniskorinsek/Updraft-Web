@@ -1,0 +1,229 @@
+[
+ {
+  "id": "meadow",
+  "name": "Meadow",
+  "world": "feather",
+  "alt": [
+   0,
+   200
+  ],
+  "sky": [
+   "#7FB4D9",
+   "#B9D7E6",
+   "#F4E3C2",
+   "#F8D9A6"
+  ]
+ },
+ {
+  "id": "forest",
+  "name": "Forest",
+  "world": "feather",
+  "alt": [
+   200,
+   600
+  ],
+  "sky": [
+   "#5E7FA3",
+   "#93AFC4",
+   "#E9D8B4",
+   "#E3C690"
+  ]
+ },
+ {
+  "id": "treetops",
+  "name": "Tree Tops",
+  "world": "feather",
+  "alt": [
+   600,
+   1200
+  ],
+  "sky": [
+   "#5E7FA8",
+   "#9FB3C8",
+   "#E6D9C0",
+   "#F6DDB0"
+  ]
+ },
+ {
+  "id": "clouds",
+  "name": "Clouds",
+  "world": "feather",
+  "alt": [
+   1200,
+   2500
+  ],
+  "sky": [
+   "#4A5674",
+   "#7A7F9E",
+   "#C9B4AE",
+   "#F0CDA0",
+   "#F8D9A6"
+  ]
+ },
+ {
+  "id": "sunset",
+  "name": "Sunset",
+  "world": "feather",
+  "alt": [
+   2500,
+   5000
+  ],
+  "sky": [
+   "#3C3F66",
+   "#6A5A80",
+   "#C98A8A",
+   "#F0A070",
+   "#F8C88A"
+  ]
+ },
+ {
+  "id": "highsky",
+  "name": "High Sky",
+  "world": "feather",
+  "alt": [
+   5000,
+   99999
+  ],
+  "sky": [
+   "#0E1530",
+   "#24305C",
+   "#4B4F86",
+   "#8E7FA6"
+  ]
+ },
+ {
+  "id": "lagoon",
+  "name": "Bubble Lagoon",
+  "world": "bubble",
+  "alt": [
+   0,
+   300
+  ],
+  "sky": [
+   "#8FD2EC",
+   "#BFE6F2",
+   "#F3E9D0",
+   "#F6D9A6"
+  ]
+ },
+ {
+  "id": "isles",
+  "name": "Floating Isles",
+  "world": "bubble",
+  "alt": [
+   300,
+   800
+  ],
+  "sky": [
+   "#86C8EA",
+   "#B6DEF2",
+   "#EEE6D8",
+   "#F7DDB8"
+  ]
+ },
+ {
+  "id": "prism",
+  "name": "Prism Sky",
+  "world": "bubble",
+  "alt": [
+   800,
+   2000
+  ],
+  "sky": [
+   "#9CB8F0",
+   "#C6CEF5",
+   "#F2DDEB",
+   "#FBE3C8"
+  ]
+ },
+ {
+  "id": "moonbow",
+  "name": "Moonbow Sky",
+  "world": "bubble",
+  "alt": [
+   2000,
+   99999
+  ],
+  "sky": [
+   "#2E3570",
+   "#4E4E8E",
+   "#8F7FB8",
+   "#E2BFD6"
+  ]
+ },
+ {
+  "id": "snowyforest",
+  "name": "Snowy Forest",
+  "world": "winter",
+  "alt": [
+   0,
+   300
+  ],
+  "sky": [
+   "#0E1838",
+   "#1B2A57",
+   "#2E4378",
+   "#4A5E92"
+  ]
+ },
+ {
+  "id": "village",
+  "name": "Winter Village",
+  "world": "winter",
+  "alt": [
+   300,
+   900
+  ],
+  "sky": [
+   "#0A1330",
+   "#142250",
+   "#213567",
+   "#2C4377"
+  ]
+ },
+ {
+  "id": "rooftops",
+  "name": "Rooftops & Chimneys",
+  "world": "winter",
+  "alt": [
+   900,
+   1600
+  ],
+  "sky": [
+   "#0B1534",
+   "#17265A",
+   "#27407A",
+   "#3A5590"
+  ]
+ },
+ {
+  "id": "snowclouds",
+  "name": "Snow Clouds",
+  "world": "winter",
+  "alt": [
+   1600,
+   3000
+  ],
+  "sky": [
+   "#1A2A50",
+   "#34477A",
+   "#5C6F9E",
+   "#8E9EC2"
+  ]
+ },
+ {
+  "id": "aurora",
+  "name": "Aurora Sky",
+  "world": "winter",
+  "alt": [
+   3000,
+   99999
+  ],
+  "sky": [
+   "#050A1E",
+   "#0A1638",
+   "#13245A",
+   "#1C3270"
+  ]
+ }
+]

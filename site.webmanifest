@@ -1,0 +1,21 @@
+{
+ "name": "UPDRAFT",
+ "short_name": "UPDRAFT",
+ "description": "A small breath. A big adventure.",
+ "start_url": "./",
+ "display": "browser",
+ "background_color": "#4A5674",
+ "theme_color": "#4A5674",
+ "icons": [
+  {
+   "src": "assets/brand/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "assets/brand/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  }
+ ]
+}
