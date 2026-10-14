@@ -11,6 +11,35 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
 
+  /* ------------------------------------------------------------ scroll hub */
+  /* One requestAnimationFrame per scroll for every scroll-driven effect. Frame handlers get the cached scrollY and
+     viewport height and only write transform / opacity / classes; everything that needs layout is read in the
+     measure handlers, which run on resize, load, fonts ready, language change and when the body changes size.
+     A frame handler returns true to be called again on the next frame (settling animations). */
+  var SC = { y: window.scrollY, vh: window.innerHeight, t: 0, raf: 0, mraf: 0, upd: [], mea: [] };
+  function onFrame(fn) { SC.upd.push(fn); }
+  function onMeasure(fn) { SC.mea.push(fn); }
+  function scTick() {
+    SC.raf = 0; SC.y = window.scrollY; SC.vh = window.innerHeight; SC.t = performance.now();
+    var again = false;
+    for (var i = 0; i < SC.upd.length; i++) if (SC.upd[i](SC.y, SC.vh) === true) again = true;
+    if (again) scKick();
+  }
+  function scKick() { if (!SC.raf) SC.raf = requestAnimationFrame(scTick); }
+  function scMeasure() {
+    SC.mraf = 0; if (SC.raf) { cancelAnimationFrame(SC.raf); SC.raf = 0; }
+    for (var i = 0; i < SC.mea.length; i++) SC.mea[i]();
+    scTick();                                                  /* same frame: no flash of unpositioned layers */
+  }
+  function scRemeasure() { if (!SC.mraf) SC.mraf = requestAnimationFrame(scMeasure); }
+  window.addEventListener('scroll', scKick, { passive: true });
+  window.addEventListener('resize', scRemeasure);
+  window.addEventListener('load', scRemeasure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(scRemeasure);
+  document.addEventListener('updraft:lang', function () { setTimeout(scRemeasure, 60); });
+  if ('ResizeObserver' in window) new ResizeObserver(scRemeasure).observe(document.body);
+  setTimeout(scRemeasure, 1500);
+
   /* ---------------------------------------------------------------- config */
   if (cfg.playUrl) $$('a[data-play]').forEach(function (a) { a.href = cfg.playUrl; });
   if (cfg.supportEmail) $$('[data-email]').forEach(function (a) { a.href = 'mailto:' + cfg.supportEmail; a.textContent = cfg.supportEmail; });
@@ -65,8 +94,8 @@
   /* ------------------------------------------------------------------- nav */
   var nav = $('#nav');
   if (nav) {
-    var onNavScroll = function () { nav.classList.toggle('is-solid', window.scrollY > 24); };
-    onNavScroll(); window.addEventListener('scroll', onNavScroll, { passive: true });
+    var navSolid = null;
+    onFrame(function (y) { var on = y > 24; if (on !== navSolid) { navSolid = on; nav.classList.toggle('is-solid', on); } });
   }
   var menuBtn = $('#menu-btn'), menu = $('#menu');
   if (menuBtn && menu) {
@@ -79,19 +108,17 @@
   /* ------------------------------------------------- nav: progress feather */
   var npBar = $('#np-bar'), npF = $('#np-feather');
   if (nav && npBar && npF) {
-    var npY = window.scrollY, npVel = 0, npAng = -12, npRaf = 0;
-    var npDraw = function () {
-      var max = document.documentElement.scrollHeight - window.innerHeight, p = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0, w = nav.clientWidth;
-      var v = window.scrollY - npY; npY = window.scrollY;
+    var npY = window.scrollY, npVel = 0, npAng = -12, npMax = 1, npW = nav.clientWidth;
+    onMeasure(function () { npMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight); npW = nav.clientWidth; });
+    onFrame(function (y) {
+      var p = clamp(y / npMax, 0, 1), v = y - npY; npY = y;
       npVel += (v - npVel) * 0.25; if (Math.abs(npVel) < 0.05) npVel = 0;
       var target = reduced ? -12 : -12 + clamp(npVel * 0.9, -30, 30);
       npAng += (target - npAng) * 0.2;
       npBar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
-      npF.style.transform = 'translate3d(' + (p * w - 16).toFixed(1) + 'px,-50%,0) rotate(' + npAng.toFixed(1) + 'deg)';
-      npRaf = (npVel !== 0 || Math.abs(target - npAng) > 0.2) ? requestAnimationFrame(npDraw) : 0;
-    };
-    var npKick = function () { if (!npRaf) npRaf = requestAnimationFrame(npDraw); };
-    window.addEventListener('scroll', npKick, { passive: true }); window.addEventListener('resize', npKick); npKick();
+      npF.style.transform = 'translate3d(' + (p * npW - 16).toFixed(1) + 'px,-50%,0) rotate(' + npAng.toFixed(1) + 'deg)';
+      return npVel !== 0 || Math.abs(target - npAng) > 0.2;     /* keep settling after the scroll stops */
+    });
   }
 
   /* ------------------------------------------------------------ sticky bar */
@@ -168,7 +195,7 @@
     var holdStart = 0, holdX = 0, holdY = 0, holdMoved = 0, kbSteer = 0, noteUntil = 0, toastTimer = 0, placed = false;
     var ptr = { x: 0, y: 0, vx: 0, vy: 0, t: 0, active: false, last: -99, overZone: false };
     var parts = [], sparks = [], streaks = [], trail = [], SPR = {};
-    var lastTD = -1, lastTN = -1, lastCam = -1, lastAltTxt = '', lastE = -1;
+    var lastTD = -1, lastTN = -1, lastCam = -1, lastAltTxt = '', lastE = -1, frameN = 0;
     var best = 0; try { best = +localStorage.getItem('updraft-best') || 0; } catch (e) {}
 
     /* ---------- sprites (pre-rendered once) */
@@ -205,7 +232,7 @@
       band.t = topB + fh * 0.7; band.b = botT - fh * 0.75;
       if (band.b - band.t < fh * 0.6) { var mid = (topB + botT) / 2; band.t = mid - fh * 0.3; band.b = mid + fh * 0.3; }
       home.x = Z.l + Z.w / 2; home.y = band.t + (band.b - band.t) * 0.55;
-      dpr = Math.min(1.5, window.devicePixelRatio || 1);
+      dpr = Math.min(W < 700 ? 1 : 1.25, window.devicePixelRatio || 1);
       canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       clouds.forEach(function (c) { c.el.style.transform = ''; var r = c.el.getBoundingClientRect(); c.top = r.top - hr.top; c.h = r.height; c.el.style.transform = c.tr; });
       if (!parts.length || Math.abs((parts.w || 0) - W) > 120) seedParticles();
@@ -485,6 +512,7 @@
     function frame(nowMs) {
       if (!running) return;
       raf = requestAnimationFrame(frame);
+      if (nowMs - SC.t < 160 && (++frameN & 1)) return;        /* while the page scrolls, run at half rate */
       var dt = last ? Math.min(0.05, (nowMs - last) / 1000) : 0.016; last = nowMs; time += dt;
       var nowS = nowMs / 1000;
 
@@ -599,7 +627,7 @@
     if ('ResizeObserver' in window) new ResizeObserver(remeasure).observe(hero);
     setTimeout(remeasure, 1300);
     if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) { es.forEach(function (e) { visible = e.isIntersecting; if (visible) start(); else stop(); }); }, { threshold: 0.02 }).observe(hero);
+      new IntersectionObserver(function (es) { es.forEach(function (e) { visible = e.intersectionRatio >= 0.25; if (visible) start(); else stop(); }); }, { threshold: [0, 0.25, 0.5] }).observe(hero);
     } else { visible = true; start(); }
     document.addEventListener('updraft:lang', function () {
       setLabel(); showBest();
@@ -641,46 +669,35 @@
 
   /* ------------------------------------------------------------- parallax */
   /* data-px = k: the layer moves (1 − k)× the page speed (k > 0 = farther away, k < 0 = closer). data-pxx adds sideways drift. */
-  var pxItems = [], pxTick = false, heroEl2 = $('#hero'), heroSky = $('#hero-sky'), heroClouds = $('#hero-clouds'), heroCopy = $('#hero-copy'), copyIsBox = true;
+  var pxItems = [], heroEl2 = $('#hero'), heroSky = $('#hero-sky'), heroClouds = $('#hero-clouds'), heroCopy = $('#hero-copy'), copyIsBox = true, heroH = 0;
   function pxMeasure() {
-    pxItems = $$('[data-px], [data-pxx]').map(function (el) {
-      var prev = el.style.transform; el.style.transform = 'none';
-      var r = el.getBoundingClientRect(); el.style.transform = prev;
-      return { el: el, top: r.top + window.scrollY, h: r.height, k: parseFloat(el.getAttribute('data-px')) || 0, kx: parseFloat(el.getAttribute('data-pxx')) || 0, max: parseFloat(el.getAttribute('data-pxmax')) || 1e4 };
+    var els = $$('[data-px], [data-pxx]'), sy = window.scrollY;
+    els.forEach(function (el) { el.style.transform = 'none'; });          /* measure untransformed: one layout for all of them */
+    pxItems = els.map(function (el) {
+      var r = el.getBoundingClientRect();
+      return { el: el, top: r.top + sy, h: r.height, k: parseFloat(el.getAttribute('data-px')) || 0, kx: parseFloat(el.getAttribute('data-pxx')) || 0, max: parseFloat(el.getAttribute('data-pxmax')) || 1e4, tr: '' };
     });
+    heroH = heroEl2 ? heroEl2.offsetHeight : 0;
     copyIsBox = !!heroCopy && getComputedStyle(heroCopy).display !== 'contents';
     if (heroCopy && !copyIsBox) { heroCopy.style.transform = ''; heroCopy.style.opacity = ''; }
   }
-  function pxUpdate() {
-    pxTick = false;
-    var sy = window.scrollY, vh = window.innerHeight, mid = sy + vh / 2;
+  function pxUpdate(sy, vh) {
+    var mid = sy + vh / 2;
     for (var i = 0; i < pxItems.length; i++) {
       var p = pxItems[i];
       if (p.top + p.h < sy - vh * 0.6 || p.top > sy + vh * 1.6) continue;
       var d = p.top + p.h / 2 - mid, ty = clamp(-d * p.k, -p.max, p.max), tx = -d * p.kx;
-      p.el.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0)';
+      var tr = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0)';
+      if (tr !== p.tr) { p.tr = tr; p.el.style.transform = tr; }
     }
     /* hero exit: the sky falls behind, the cloud floor rushes past, the words drift away */
-    if (heroEl2) {
-      var hh = heroEl2.offsetHeight;
-      if (sy < hh + 120) {
-        if (heroSky) heroSky.style.transform = 'translate3d(0,' + (sy * 0.42).toFixed(1) + 'px,0)';
-        if (heroClouds) heroClouds.style.transform = 'translate3d(0,' + (-sy * 0.14).toFixed(1) + 'px,0)';
-        if (heroCopy && copyIsBox) { heroCopy.style.transform = 'translate3d(0,' + (sy * 0.22).toFixed(1) + 'px,0)'; heroCopy.style.opacity = clamp(1 - sy / (hh * 0.85), 0, 1).toFixed(3); }
-      }
+    if (heroEl2 && sy < heroH + 120) {
+      if (heroSky) heroSky.style.transform = 'translate3d(0,' + (sy * 0.42).toFixed(1) + 'px,0)';
+      if (heroClouds) heroClouds.style.transform = 'translate3d(0,' + (-sy * 0.14).toFixed(1) + 'px,0)';
+      if (heroCopy && copyIsBox) { heroCopy.style.transform = 'translate3d(0,' + (sy * 0.22).toFixed(1) + 'px,0)'; heroCopy.style.opacity = clamp(1 - sy / (heroH * 0.85), 0, 1).toFixed(3); }
     }
   }
-  if (!reduced) {
-    var pxKick = function () { if (!pxTick) { pxTick = true; requestAnimationFrame(pxUpdate); } };
-    var pxRe = function () { pxMeasure(); pxUpdate(); };
-    pxRe();
-    window.addEventListener('scroll', pxKick, { passive: true });
-    window.addEventListener('resize', pxRe);
-    window.addEventListener('load', pxRe);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(pxRe);
-    document.addEventListener('updraft:lang', function () { setTimeout(pxRe, 60); });
-    setTimeout(pxRe, 1500);
-  }
+  if (!reduced) { onMeasure(pxMeasure); onFrame(pxUpdate); pxMeasure(); pxUpdate(window.scrollY, window.innerHeight); }
 
   /* ------------------------------------------- how it works: the wind trail */
   var trailBox = $('#wind-trail');
@@ -688,13 +705,13 @@
 
   function initTrail(box) {
     var svg = $('svg', box), base = $('.wt-base', box), draw = $('.wt-draw', box), rings = $$('.wt-ring', box), fea = $('.wt-feather', box);
-    var steps = $$('#how .step'), len = 0, ringT = [], tick = false;
+    var steps = $$('#how .step'), len = 0, ringT = [], boxTop = 0, samples = [], N = 160, lastP = -1, lit = [];
     function fracAtX(x) { var lo = 0, hi = len; for (var k = 0; k < 22; k++) { var m = (lo + hi) / 2; if (draw.getPointAtLength(m).x < x) lo = m; else hi = m; } return lo / len; }
     function build() {
-      len = 0;
+      len = 0; samples = []; lastP = -1;
       if (getComputedStyle(box).display === 'none') return;
       var r = box.getBoundingClientRect(); if (!r.width) return;
-      var W = r.width, H = r.height;
+      var W = r.width, H = r.height; boxTop = r.top + window.scrollY;
       svg.setAttribute('viewBox', '0 0 ' + W.toFixed(0) + ' ' + H.toFixed(0));
       var xs = steps.map(function (s) { var b = s.getBoundingClientRect(); return b.left - r.left + b.width / 2; });
       if (xs.length < 3) return;
@@ -707,24 +724,22 @@
       }
       base.setAttribute('d', d); draw.setAttribute('d', d);
       len = draw.getTotalLength(); draw.style.strokeDasharray = len.toFixed(1);
+      for (var s = 0; s <= N; s++) { var q = draw.getPointAtLength(len * s / N); samples.push(q.x, q.y); }
       ringT = rings.map(function (rg, i) { rg.style.setProperty('--x', pts[i + 1][0].toFixed(1) + 'px'); rg.style.setProperty('--y', pts[i + 1][1].toFixed(1) + 'px'); return fracAtX(pts[i + 1][0]); });
-      update();
+      update(window.scrollY, window.innerHeight);
     }
-    function update() {
-      tick = false; if (!len) return;
-      var r = box.getBoundingClientRect(), vh = window.innerHeight;
-      var p = reduced ? 1 : clamp((vh * 0.84 - r.top) / (vh * 0.56), 0, 1);
+    function update(y, vh) {
+      if (!len) return;
+      var p = reduced ? 1 : clamp((vh * 0.84 - (boxTop - y)) / (vh * 0.56), 0, 1);
+      if (p === lastP) return; lastP = p;
       draw.style.strokeDashoffset = (len * (1 - p)).toFixed(1);
-      var L = Math.min(len - 2, len * p), a = draw.getPointAtLength(L), b = draw.getPointAtLength(L + 2);
-      var ang = Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI;
-      fea.style.transform = 'translate(' + a.x.toFixed(1) + 'px,' + a.y.toFixed(1) + 'px) rotate(' + (ang + 22).toFixed(1) + 'deg)';
-      rings.forEach(function (rg, i) { var lit = p >= ringT[i] - 0.005; rg.classList.toggle('lit', lit); if (steps[i]) steps[i].classList.toggle('lit', lit); });
+      var f = p * (N - 1), i = Math.floor(f), k = f - i, j = 2 * i;
+      var ax = samples[j] + (samples[j + 2] - samples[j]) * k, ay = samples[j + 1] + (samples[j + 3] - samples[j + 1]) * k;
+      var ang = Math.atan2(samples[j + 3] - samples[j + 1], samples[j + 2] - samples[j]) * 180 / Math.PI;
+      fea.style.transform = 'translate(' + ax.toFixed(1) + 'px,' + ay.toFixed(1) + 'px) rotate(' + (ang + 22).toFixed(1) + 'deg)';
+      for (var n = 0; n < rings.length; n++) { var on = p >= ringT[n] - 0.005; if (on !== lit[n]) { lit[n] = on; rings[n].classList.toggle('lit', on); if (steps[n]) steps[n].classList.toggle('lit', on); } }
     }
-    build();
-    window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(update); } }, { passive: true });
-    window.addEventListener('resize', build); window.addEventListener('load', build);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
-    document.addEventListener('updraft:lang', function () { setTimeout(build, 60); });
+    onMeasure(build); onFrame(update); build();
   }
 
   /* --------------------------------------- daily: marquee follows the scroll */
@@ -769,9 +784,9 @@
   function initJourney(track) {
     var section = $('#worlds'), list = $('#journey-list'), layers = [$('#journey-a'), $('#journey-b')], altEl = $('#journey-alt');
     var worldEl = $('#journey-world'), biomeEl = $('#journey-biome'), kEl = $('#journey-k'), tabs = $$('.wtab', section);
-    var world = 'feather', items = [], idx = -1, active = 0, ticking = false;
+    var world = 'feather', items = [], idx = -1, active = 0, trackTop = 0, trackH = 0, lastAlt = '', swapId = 0;
     var WORLD_KEY = { feather: 'worlds.tab.feather', bubble: 'worlds.tab.bubble', winter: 'worlds.tab.winter' };
-    var jClouds = $$('.journey-clouds img', section).map(function (im) { return { el: im, k: parseFloat(im.getAttribute('data-jk')) || 0.5, y0: parseFloat(im.getAttribute('data-jy')) || 0 }; });
+    var jClouds = $$('.journey-clouds img', section).map(function (im) { return { el: im, k: parseFloat(im.getAttribute('data-jk')) || 0.5, y0: parseFloat(im.getAttribute('data-jy')) || 0, h: 80, tr: '' }; });
     var K_KEY = { feather: 'worlds.k.feather', bubble: 'worlds.k.bubble', winter: 'worlds.k.winter' };
 
     function name(b) { return (lang === 'sl' && b.name_sl) ? b.name_sl : b.name; }
@@ -781,16 +796,21 @@
     function buildList() {
       items = BIOMES.filter(function (b) { return b.world === world; });
       list.innerHTML = items.map(function (b) { return '<li><span>' + name(b) + '</span><span class="alt num">' + altText(b) + '</span></li>'; }).join('');
-      items.forEach(function (b) { var im = new Image(); im.src = 'assets/biomes/' + b.id + '.svg'; });
+      items.forEach(function (b) { var im = new Image(); im.src = 'assets/biomes/' + b.id + '@2x.webp'; });
       if (worldEl) worldEl.textContent = t(WORLD_KEY[world]);
       if (kEl) { var k = t(K_KEY[world]); if (k) kEl.innerHTML = k; }
     }
     function setBiome(i, force) {
       if (i === idx && !force) return;
       var b = items[i]; if (!b) return;
-      var next = layers[1 - active], cur = layers[active];
-      if (next.getAttribute('src') !== 'assets/biomes/' + b.id + '.svg') next.src = 'assets/biomes/' + b.id + '.svg';
-      next.classList.add('is-on'); cur.classList.remove('is-on'); active = 1 - active; idx = i;
+      var next = layers[1 - active], cur = layers[active], src = 'assets/biomes/' + b.id + '@2x.webp', id = ++swapId;
+      idx = i;
+      var show = function () {                                   /* crossfade only once the image is decoded */
+        if (id !== swapId) return;                               /* a newer biome has taken over */
+        next.classList.add('is-on'); cur.classList.remove('is-on'); active = 1 - active;
+      };
+      if (next.getAttribute('src') !== src) { next.src = src; if (next.decode) next.decode().then(show, show); else show(); }
+      else show();
       if (biomeEl) biomeEl.textContent = name(b);
       $$('li', list).forEach(function (li, j) { li.classList.toggle('is-on', j === i); });
       var s = b.sky, a = s[0], bb = s[1] || s[0], c = s[s.length - 2] || s[0], d = s[s.length - 1];
@@ -798,30 +818,36 @@
       var dark = (lum(a) + lum(d)) / 2 < 0.5;
       section.classList.toggle('is-dark', dark); section.classList.toggle('light', !dark);
     }
-    function update() {
-      ticking = false;
-      var r = track.getBoundingClientRect(), total = track.offsetHeight - window.innerHeight;
-      if (total <= 0) return;
-      var p = clamp(-r.top / total, 0, 1), n = items.length, f = p * n, i = Math.min(n - 1, Math.floor(f)), seg = clamp(f - i, 0, 1);
-      setBiome(i);
-      if (!reduced) { var vh = window.innerHeight, sc = -r.top; jClouds.forEach(function (c) { var hgt = c.el.offsetHeight || 80, span = vh + hgt, y = ((c.y0 * vh + sc * c.k) % span + span) % span - hgt; c.el.style.transform = 'translate3d(0,' + y.toFixed(1) + 'px,0)'; }); }
-      var b = items[i], a0 = b.alt[0], a1 = b.alt[1] > 50000 ? a0 + 2500 : b.alt[1];
-      if (altEl) altEl.textContent = fmt(Math.round((a0 + seg * (a1 - a0)) / 10) * 10);
+    function measure() {
+      var r = track.getBoundingClientRect(); trackTop = r.top + window.scrollY; trackH = track.offsetHeight;
+      jClouds.forEach(function (c) { c.h = c.el.offsetHeight || 80; });
     }
-    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    function update(y, vh) {
+      var top = trackTop - y, total = trackH - vh;
+      if (total <= 0 || top > vh * 1.5 || top + trackH < -vh * 0.5) return;        /* far off screen */
+      var p = clamp(-top / total, 0, 1), n = items.length, f = p * n, i = Math.min(n - 1, Math.floor(f)), seg = clamp(f - i, 0, 1);
+      setBiome(i);
+      if (!reduced) {
+        for (var c = 0; c < jClouds.length; c++) {
+          var cl = jClouds[c], span = vh + cl.h, cy = ((cl.y0 * vh - top * cl.k) % span + span) % span - cl.h;
+          var tr = 'translate3d(0,' + cy.toFixed(1) + 'px,0)'; if (tr !== cl.tr) { cl.tr = tr; cl.el.style.transform = tr; }
+        }
+      }
+      var b = items[i], a0 = b.alt[0], a1 = b.alt[1] > 50000 ? a0 + 2500 : b.alt[1];
+      var txt = fmt(Math.round((a0 + seg * (a1 - a0)) / 10) * 10);
+      if (altEl && txt !== lastAlt) { lastAlt = txt; altEl.textContent = txt; }
+    }
     tabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         world = tab.getAttribute('data-world');
         tabs.forEach(function (x) { x.setAttribute('aria-selected', String(x === tab)); });
-        buildList(); idx = -1; update();
-        var top = track.getBoundingClientRect().top + window.scrollY;
-        if (window.scrollY > top) window.scrollTo({ top: top + 2, behavior: reduced ? 'auto' : 'smooth' });
+        buildList(); idx = -1; measure(); update(window.scrollY, window.innerHeight);
+        if (window.scrollY > trackTop) window.scrollTo({ top: trackTop + 2, behavior: reduced ? 'auto' : 'smooth' });
       });
     });
-    document.addEventListener('updraft:lang', function () { buildList(); setBiome(Math.max(0, idx), true); update(); });
-    buildList(); setBiome(0, true); update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    document.addEventListener('updraft:lang', function () { buildList(); setBiome(Math.max(0, idx), true); lastAlt = ''; measure(); update(window.scrollY, window.innerHeight); });
+    buildList(); setBiome(0, true); measure(); update(window.scrollY, window.innerHeight);
+    onMeasure(measure); onFrame(update);
   }
 
   /* ----------------------------------------------------------- winter snow */
@@ -831,7 +857,7 @@
   function initSnow(canvas) {
     var ctx = canvas.getContext('2d'), W = 0, H = 0, flakes = [], running = false, raf = 0, last = 0;
     function resize() {
-      var r = canvas.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+      var r = canvas.getBoundingClientRect(), dpr = Math.min(1.5, window.devicePixelRatio || 1);
       W = r.width; H = r.height; canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       flakes = []; for (var i = 0; i < 90; i++) flakes.push(make(true));
     }
@@ -851,6 +877,5 @@
     whenVisible(canvas, function () { if (!running) { running = true; last = 0; raf = requestAnimationFrame(frame); } }, function () { running = false; cancelAnimationFrame(raf); });
   }
 
-  /* ----------------------------------------------- numbers follow language */
-  document.addEventListener('updraft:lang', function () { /* re-render handled by the components above */ });
+  scTick();                                                  /* first frame of the scroll-driven effects */
 })();

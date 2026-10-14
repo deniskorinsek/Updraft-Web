@@ -15,7 +15,7 @@ Everything in this folder is published (GitHub Pages serves every file, this one
 
 | Path | Contents |
 |---|---|
-| `index.html` | landing page: inline icon sprite, nav with scroll-progress feather, `#hero` (playable feather), `#how` (+ wind trail), `#flyers`, `#worlds` (+ sticky `#journey`), `#winter` (inline village SVG + snow canvas), `#daily` (+ screen marquee), `#privacy` strip, `#download` (button, QR, store link), sticky CTA on phones, footer |
+| `index.html` | landing page: inline icon sprite, nav with scroll-progress feather, `#hero` (playable feather), `#how` (+ wind trail), `#flyers`, `#worlds` (+ sticky `#journey`), `#winter` (pre-rendered village + sleigh + snow canvas), `#daily` (+ screen marquee), `#privacy` strip, `#download` (button, QR, store link), sticky CTA on phones, footer |
 | `privacy.html`, `support.html` | EN and SL as two blocks: `<div data-lang="en">` and `<div data-lang="sl" hidden>` |
 | `404.html` | not-found page; fixes the base path for the `/Updraft-Web/` project URL at runtime |
 | `css/site.css` | all styles, in this order: tokens (`:root`) → base → buttons → nav → hero → scroll reveal → sections → inner pages → motion layer → reduced motion (last block) |
@@ -23,10 +23,10 @@ Everything in this folder is published (GitHub Pages serves every file, this one
 | `js/strings.js` | all landing-page copy: `window.UPDRAFT_STRINGS = { en: {…}, sl: {…} }` |
 | `js/biomes.js` | biome list for the Worlds section (from `../design/specs/biomes.json`) |
 | `js/site.js` | all behaviour, one IIFE (map below) |
-| `assets/` | `brand/` (logo, icons, `og.jpg`, `qr-play.svg`), `flyers/` + `skins/`, `world/` (clouds, stars), `biomes/` (SVG + WebP), `screens/` (app screenshots), `fonts/` (Cormorant Garamond + Jost, OFL), `icons.svg` |
+| `assets/` | `brand/` (logo, icons, `og.jpg`, `qr-play.svg`), `flyers/` + `skins/`, `world/` (clouds, stars, `village_sleigh.svg`), `biomes/` (SVG reference, 1x WebP for the no-JS grid, `@2x.webp` for the journey phone, `village_scene@2x.webp`), `screens/` (app screenshots), `fonts/` (Cormorant Garamond + Jost, OFL), `icons.svg` |
 | `README.md` | human docs: publishing, go-live checklist, editing copy |
 
-`site.js`, top to bottom: config wiring → i18n (`t()`, `fmt()`, `applyLang()`; fires the `updraft:lang` event) → nav (solid on scroll, mobile menu) → nav progress feather → sticky CTA (phones) → reveal (`.rv` gets `.in`) and `whenVisible()` → hero engine `initHero()` (canvas wind particles, feather physics, skins, microphone, altitude and sky, toast) → motion layer (`splitWords`, `pxMeasure`/`pxUpdate`, `initTrail`, marquee) → flyer card tilt → `initJourney()` → `initSnow()`.
+`site.js`, top to bottom: config wiring → scroll hub (`onMeasure`, `onFrame`, one rAF per scroll) → i18n (`t()`, `fmt()`, `applyLang()`; fires the `updraft:lang` event) → nav (solid on scroll, mobile menu) → nav progress feather → sticky CTA (phones) → reveal (`.rv` gets `.in`) and `whenVisible()` → hero engine `initHero()` (canvas wind particles, feather physics, skins, microphone, altitude and sky, toast) → motion layer (`splitWords`, `pxMeasure`/`pxUpdate`, `initTrail`, marquee) → flyer card tilt → `initJourney()` → `initSnow()` → first `scTick()`.
 
 ## Rules
 
@@ -46,7 +46,7 @@ Everything in this folder is published (GitHub Pages serves every file, this one
 - **Motion hooks**:
   - `data-px="k"` is parallax: the element moves at (1 − k)× the scroll speed (k > 0 is farther, k < 0 is closer).
   - `data-pxx` adds sideways drift; `data-pxmax` clamps the offset (px).
-  - Positions are cached in `pxMeasure()` and re-measured on resize, load, fonts ready and language change.
+  - Positions are cached in `pxMeasure()` (an `onMeasure` handler) and re-measured on resize, load, fonts ready, language change and body resize.
   - Hero clouds use `data-climb` (the camera climb of the hero game), not `data-px`.
   - `h2.split` headings are split into word spans and rise when their `.rv` parent gets `.in`.
 - **Reduced motion**: every animation needs a still final state. Use the CSS block at the end of `site.css` and the `reduced` flag in `site.js`.
@@ -69,49 +69,23 @@ Everything in this folder is published (GitHub Pages serves every file, this one
    - a toast with the Play button appears after a flight above 300 m.
 6. Commit, `git push`, then check the live URL.
 
+## Performance
+
+Scrolling was measured and tuned on 14 Oct 2026 (see `../web-tools/`, outside the repo: `scrollbench.py` scrolls the page at a fixed speed in Playwright Chromium and records rAF frame intervals, long tasks, CDP metrics and a trace with dropped compositor frames; `shots.py` takes before/after section screenshots; `results/*.json` keeps every run). Rules that came out of it:
+
+- **No `backdrop-filter`** except on `.nav.is-solid` under `@media (hover: hover)`. Glass surfaces are semi-opaque colours.
+- **No `mix-blend-mode`.** The hero light leaks are four discs painted into one `.leaks` layer.
+- **One scroll loop.** Every scroll-driven effect registers `onMeasure(fn)` (layout reads, cached) and `onFrame(fn)` (writes only: transform, opacity, classes) with the scroll hub at the top of `site.js`. Never add a second `scroll` listener or read layout in a frame handler. Measures re-run on resize, load, fonts ready, `updraft:lang` and when the body resizes.
+- **Finite decorative animations** in the hero (shimmer and sheen run 3 times); the button glow fades a pseudo-element's shadow. Infinite animations must only touch transform or opacity.
+- **Pre-rendered heavy art**: the winter village is `assets/biomes/village_scene@2x.webp` with the sleigh as `assets/world/village_sleigh.svg` moved by a transform (`cqw` units; without container-query support it stays still). The journey phone shows `assets/biomes/<id>@2x.webp` (from `../design/reference/biomes/*.png`, quality 80) and waits for `img.decode()` before the crossfade. The 1x `.webp` files serve the no-JS grid; the biome `.svg` files are kept for reference only.
+- Canvas DPR caps: hero 1.25 (1 under 700 px wide), snow 1.5. The hero loop runs at half rate while the page scrolls and stops below 25 % visibility.
+- Tried and rejected: pausing CSS animations in off-screen sections (`animation-play-state`) caused layer churn and more dropped frames on desktop.
+
+To re-measure: `cd ../web-tools && ./venv/bin/python scrollbench.py --label <name>` (add `--headed` for the real GPU), then compare with `results/baseline.json` / `results/gpu-baseline.json`.
+
 ## Open work (handover, 14 Oct 2026)
 
-### 1. Deployment — check first
-- Pushed: `main` = `f716f3a` "UPDRAFT website". It was **not verified** whether Pages is enabled and live. Run the Pages status command, then open the live URL, `privacy.html`, `support.html` and a missing page.
-- Not committed yet:
-  - this file;
-  - `node_modules/` in `.gitignore`;
-  - a copy fix: the site said "Android 8.0 and newer" but the app's minSdk is 29, so it now says "Android 10" in `index.html`, `support.html` and `js/strings.js`.
-
-  Review `git diff`, commit, push.
-
-### 2. Scroll smoothness — the owner says scrolling is not smooth
-Measure first, then fix in this order and re-measure after each step. Keep the look: compare screenshots before and after.
-
-**Benchmark** (Playwright + Chromium, script outside the repo):
-- scroll top to bottom at a fixed speed with `page.mouse.wheel`;
-- record rAF frame intervals (p50, p95, share > 20 ms), long tasks (`PerformanceObserver` type `longtask`) and CDP `Performance.getMetrics` (LayoutDuration, RecalcStyleDuration, ScriptDuration);
-- run at 1440×900, and at 390×844 with 4× CPU throttling.
-
-**Suspects and fixes, biggest first:**
-1. **`backdrop-filter` over moving content** is re-blurred every frame. It is on `.btn-ghost`, `.lang`, `.hero-trust li`, `.skins`, `.hud-mic`, `.hero-toast`, mobile `.hero .hc-lead`, `.step`, `.wtab`, `.journey-caption`, `.daily-card`, `.nav.is-solid`, `.nav-sheet` and `.sticky-cta`. → Use semi-opaque backgrounds. Keep a blur only on the nav, and only under `@media (hover: hover)`.
-2. **`#winter`**: the inline village SVG (9 SVG filters) repaints every frame because of the CSS-animated sleigh `#village-santa`. → Render the village as a WebP @2x and the sleigh as a separate small image moved with `transform`. Lower the snow canvas DPR from 2 to 1.5.
-3. **Five separate scroll handlers**, several reading layout every frame:
-   - nav;
-   - nav progress (`scrollHeight`);
-   - parallax + hero exit (`offsetHeight`);
-   - wind trail (`getBoundingClientRect`, `getPointAtLength`);
-   - journey (`getBoundingClientRect`, `offsetHeight`, plus each cloud's `offsetHeight` read between transform writes, which thrashes layout).
-
-   → Use one rAF loop driven by `scrollY`. Cache sizes and offsets on resize, load, fonts ready and `updraft:lang`. Write only `transform` and `opacity` per frame.
-4. **Hero**:
-   - Drop `mix-blend-mode: screen` on the four `.leak` layers and `.sun-rays`; merge them into one layer without blending.
-   - Endless repaint animations: `.hc-title` shimmer (background-position + drop-shadow), `.hero-word::after` sheen, `.hero-cta .btn-primary` glow (box-shadow). → Run them for a few iterations only, or animate the opacity of a pseudo-element.
-   - Lower the hero canvas DPR from 1.5 to 1.25 (1 on phones).
-   - Lighten the hero loop while scrolling, and stop it when less than ~25 % of the hero is visible (the IntersectionObserver threshold is 0.02 now).
-5. **`will-change`**: add `will-change: transform` to `[data-px], [data-pxx]`, and transform + opacity to `#hero-copy`.
-6. **Journey**: the biome SVGs have heavy filters. → Switch to WebP made from `../design/reference/biomes/*.png` (780×1688), and call `img.decode()` before the crossfade.
-7. **Small fixes**:
-   - drop the `drift` animation on the seam clouds (`.cdl img`), since parallax already moves them;
-   - remove the no-op `transition: background 1.2s` on `.s-worlds`;
-   - pause infinite CSS animations outside the viewport (an IntersectionObserver class + `animation-play-state: paused`).
-
-### 3. Before launch (owner and legal)
+### Before launch (owner and legal)
 - `privacy.html`: fill `[Publisher legal name]` and `[street, postcode and city]` in both the EN and SL blocks (ask the owner). Get a legal review, and keep the page in line with the Play Data safety form.
 - The mailbox `support@updraft.si` must exist (or change `js/config.js → supportEmail`).
 - When the privacy page is live and final:
